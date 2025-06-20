@@ -47,6 +47,7 @@ export default function ArrivalsPage() {
   const [data, setData] = useState<ArrivalsData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  console.log(setError);
   const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 

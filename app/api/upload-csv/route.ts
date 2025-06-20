@@ -40,6 +40,7 @@ export async function POST(request: NextRequest) {
         contentType: "text/csv",
         upsert: false,
       });
+    console.log("storageData", storageData);
 
     if (storageError) {
       console.error("Storage error:", storageError);
@@ -63,6 +64,7 @@ export async function POST(request: NextRequest) {
         created_at: new Date().toISOString(),
       });
 
+    console.log("dbData", dbData);
     if (dbError) {
       console.warn("Database insert warning:", dbError);
       // Don't fail the request if DB insert fails
@@ -138,7 +140,7 @@ async function processWithPythonAnalyzer(csvText: string): Promise<any> {
           reject(new Error(`Python handler error: ${result.body}`));
         }
       } catch (parseError) {
-        console.error("Failed to parse Python output:", outputData);
+        console.error("Failed to parse Python output:", outputData, parseError);
         reject(new Error("Failed to parse analysis results"));
       }
     });

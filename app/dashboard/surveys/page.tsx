@@ -37,6 +37,7 @@ export default function SurveysPage() {
   const [data, setData] = useState<SurveyData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  console.log(setError);
 
   useEffect(() => {
     const mockData: SurveyData = {

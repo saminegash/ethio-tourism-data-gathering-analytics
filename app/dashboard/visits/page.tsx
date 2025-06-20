@@ -42,7 +42,7 @@ export default function VisitsPage() {
   const [data, setData] = useState<VisitsData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-
+  console.log(setError);
   useEffect(() => {
     // Mock data for demonstration
     const mockData: VisitsData = {

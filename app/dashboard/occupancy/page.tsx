@@ -45,6 +45,7 @@ export default function OccupancyPage() {
   const [data, setData] = useState<OccupancyData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  console.log(setError);
   const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
