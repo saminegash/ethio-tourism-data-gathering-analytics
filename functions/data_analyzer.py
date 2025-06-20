@@ -439,18 +439,41 @@ def handler(event, context):
 
 # For local testing
 if __name__ == "__main__":
-    # Sample test data
-    test_event = {
-        'body': '''flight_number,origin,timestamp,passenger_count,airline
+    import sys
+    
+    try:
+        # Read from stdin when called as a script
+        if len(sys.argv) > 1:
+            # Sample test data for direct execution
+            test_event = {
+                'body': '''flight_number,origin,timestamp,passenger_count,airline
 ET301,London,2024-01-15 08:30:00,245,Ethiopian
 LH564,Frankfurt,2024-01-15 14:20:00,189,Lufthansa
 EK723,Dubai,2024-01-15 22:15:00,298,Emirates''',
-        'queryStringParameters': {
-            'analysis_type': 'arrivals_analysis',
-            'format': 'csv',
-            'insights': 'true'
+                'queryStringParameters': {
+                    'analysis_type': 'arrivals_analysis',
+                    'format': 'csv',
+                    'insights': 'true'
+                }
+            }
+        else:
+            # Read event from stdin
+            input_data = sys.stdin.read()
+            test_event = json.loads(input_data)
+        
+        result = handler(test_event, None)
+        print(json.dumps(result))
+        
+    except Exception as e:
+        error_response = {
+            'statusCode': 500,
+            'headers': {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
+            },
+            'body': json.dumps({
+                'error': 'Script execution error',
+                'message': str(e)
+            })
         }
-    }
-    
-    result = handler(test_event, None)
-    print(json.dumps(json.loads(result['body']), indent=2)) 
+        print(json.dumps(error_response)) 
