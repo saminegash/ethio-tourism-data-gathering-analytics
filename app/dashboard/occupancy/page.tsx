@@ -142,32 +142,32 @@ export default function OccupancyPage() {
 
   const isDark = resolvedTheme === "dark";
 
-  // Chart color schemes
+  // Ethiopian-themed chart colors
   const chartColors = {
     primary: [
-      "#10b981",
-      "#3b82f6",
-      "#f59e0b",
-      "#ef4444",
-      "#8b5cf6",
-      "#ec4899",
-      "#22d3ee",
+      "#3a9d4f", // Ethiopian Green
+      "#f2a814", // Ethiopian Yellow
+      "#ef4444", // Ethiopian Red
+      "#3b82f6", // Blue
+      "#8b5cf6", // Purple
+      "#ec4899", // Pink
+      "#22d3ee", // Cyan
     ],
     gradients: isDark
       ? [
-          "rgba(16, 185, 129, 0.8)",
-          "rgba(59, 130, 246, 0.8)",
-          "rgba(245, 158, 11, 0.8)",
+          "rgba(58, 157, 79, 0.8)",
+          "rgba(242, 168, 20, 0.8)",
           "rgba(239, 68, 68, 0.8)",
+          "rgba(59, 130, 246, 0.8)",
           "rgba(139, 92, 246, 0.8)",
           "rgba(236, 72, 153, 0.8)",
           "rgba(34, 211, 238, 0.8)",
         ]
       : [
-          "rgba(16, 185, 129, 0.7)",
-          "rgba(59, 130, 246, 0.7)",
-          "rgba(245, 158, 11, 0.7)",
+          "rgba(58, 157, 79, 0.7)",
+          "rgba(242, 168, 20, 0.7)",
           "rgba(239, 68, 68, 0.7)",
+          "rgba(59, 130, 246, 0.7)",
           "rgba(139, 92, 246, 0.7)",
           "rgba(236, 72, 153, 0.7)",
           "rgba(34, 211, 238, 0.7)",
@@ -184,7 +184,7 @@ export default function OccupancyPage() {
     plugins: {
       legend: {
         labels: {
-          color: isDark ? "#e5e7eb" : "#374151",
+          color: isDark ? "#e4e4e7" : "#3f3f46",
           usePointStyle: true,
           padding: 20,
           font: {
@@ -193,36 +193,30 @@ export default function OccupancyPage() {
         },
       },
       tooltip: {
-        backgroundColor: isDark ? "#1f2937" : "#ffffff",
-        titleColor: isDark ? "#f9fafb" : "#111827",
-        bodyColor: isDark ? "#e5e7eb" : "#374151",
-        borderColor: isDark ? "#374151" : "#e5e7eb",
+        backgroundColor: isDark ? "#27272a" : "#ffffff",
+        titleColor: isDark ? "#fafafa" : "#18181b",
+        bodyColor: isDark ? "#e4e4e7" : "#3f3f46",
+        borderColor: isDark ? "#3f3f46" : "#e4e4e7",
         borderWidth: 1,
       },
     },
     scales: {
       x: {
         grid: {
-          color: isDark ? "#374151" : "#f3f4f6",
-          borderColor: isDark ? "#4b5563" : "#d1d5db",
+          color: isDark ? "#3f3f46" : "#f4f4f5",
+          borderColor: isDark ? "#52525b" : "#d4d4d8",
         },
         ticks: {
-          color: isDark ? "#d1d5db" : "#6b7280",
-          font: {
-            size: 11,
-          },
+          color: isDark ? "#a1a1aa" : "#71717a",
         },
       },
       y: {
         grid: {
-          color: isDark ? "#374151" : "#f3f4f6",
-          borderColor: isDark ? "#4b5563" : "#d1d5db",
+          color: isDark ? "#3f3f46" : "#f4f4f5",
+          borderColor: isDark ? "#52525b" : "#d4d4d8",
         },
         ticks: {
-          color: isDark ? "#d1d5db" : "#6b7280",
-          font: {
-            size: 11,
-          },
+          color: isDark ? "#a1a1aa" : "#71717a",
         },
         beginAtZero: true,
         max: 100,
@@ -254,7 +248,7 @@ export default function OccupancyPage() {
         position: "right" as const,
         align: "center" as const,
         labels: {
-          color: isDark ? "#e5e7eb" : "#374151",
+          color: isDark ? "#e4e4e7" : "#3f3f46",
           usePointStyle: true,
           padding: 15,
           boxWidth: 12,
@@ -265,10 +259,10 @@ export default function OccupancyPage() {
         },
       },
       tooltip: {
-        backgroundColor: isDark ? "#1f2937" : "#ffffff",
-        titleColor: isDark ? "#f9fafb" : "#111827",
-        bodyColor: isDark ? "#e5e7eb" : "#374151",
-        borderColor: isDark ? "#374151" : "#e5e7eb",
+        backgroundColor: isDark ? "#27272a" : "#ffffff",
+        titleColor: isDark ? "#fafafa" : "#18181b",
+        bodyColor: isDark ? "#e4e4e7" : "#3f3f46",
+        borderColor: isDark ? "#3f3f46" : "#e4e4e7",
         borderWidth: 1,
       },
     },
@@ -310,13 +304,13 @@ export default function OccupancyPage() {
       {
         label: "Monthly Occupancy Rate (%)",
         data: Object.values(data?.occupancy_by_month || {}),
-        borderColor: "#10b981",
+        borderColor: "#f2a814", // Ethiopian Yellow
         backgroundColor: isDark
-          ? "rgba(16, 185, 129, 0.1)"
-          : "rgba(16, 185, 129, 0.05)",
+          ? "rgba(242, 168, 20, 0.1)"
+          : "rgba(242, 168, 20, 0.05)",
         fill: true,
         tension: 0.4,
-        pointBackgroundColor: "#10b981",
+        pointBackgroundColor: "#f2a814",
         pointBorderColor: "#ffffff",
         pointBorderWidth: 2,
         pointRadius: 4,
@@ -340,19 +334,19 @@ export default function OccupancyPage() {
   return (
     <div className="max-w-7xl mx-auto p-6 space-y-8">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+        <h1 className="text-3xl font-bold text-foreground mb-2">
           Hotel Occupancy Dashboard
         </h1>
-        <p className="text-gray-600 dark:text-gray-300">
+        <p className="text-gray-600 dark:text-gray-400">
           Analytics and insights for hotel occupancy across Ethiopia
         </p>
       </div>
 
       {/* Key Metrics */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 transition-colors border border-gray-200 dark:border-gray-700">
+        <div className="card p-6">
           <div className="flex items-center">
-            <div className="p-3 rounded-full bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400">
+            <div className="p-3 rounded-xl bg-secondary-100 dark:bg-secondary-900/30 text-secondary-600 dark:text-secondary-400">
               <svg
                 className="w-6 h-6"
                 fill="none"
@@ -371,16 +365,16 @@ export default function OccupancyPage() {
               <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
                 Average Occupancy
               </p>
-              <p className="text-2xl font-semibold text-gray-900 dark:text-white">
+              <p className="text-2xl font-semibold text-foreground">
                 {data?.average_occupancy_rate}%
               </p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 transition-colors border border-gray-200 dark:border-gray-700">
+        <div className="card p-6">
           <div className="flex items-center">
-            <div className="p-3 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400">
+            <div className="p-3 rounded-xl bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400">
               <svg
                 className="w-6 h-6"
                 fill="none"
@@ -399,16 +393,16 @@ export default function OccupancyPage() {
               <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
                 Peak Occupancy
               </p>
-              <p className="text-2xl font-semibold text-gray-900 dark:text-white">
+              <p className="text-2xl font-semibold text-foreground">
                 {data?.peak_occupancy_rate}%
               </p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 transition-colors border border-gray-200 dark:border-gray-700">
+        <div className="card p-6">
           <div className="flex items-center">
-            <div className="p-3 rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400">
+            <div className="p-3 rounded-xl bg-accent-100 dark:bg-accent-900/30 text-accent-600 dark:text-accent-400">
               <svg
                 className="w-6 h-6"
                 fill="none"
@@ -427,16 +421,16 @@ export default function OccupancyPage() {
               <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
                 Total Rooms
               </p>
-              <p className="text-2xl font-semibold text-gray-900 dark:text-white">
+              <p className="text-2xl font-semibold text-foreground">
                 {data?.total_room_capacity?.toLocaleString()}
               </p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 transition-colors border border-gray-200 dark:border-gray-700">
+        <div className="card p-6">
           <div className="flex items-center">
-            <div className="p-3 rounded-full bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400">
+            <div className="p-3 rounded-xl bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400">
               <svg
                 className="w-6 h-6"
                 fill="none"
@@ -455,7 +449,7 @@ export default function OccupancyPage() {
               <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
                 Total Revenue
               </p>
-              <p className="text-2xl font-semibold text-gray-900 dark:text-white">
+              <p className="text-2xl font-semibold text-foreground">
                 ${data?.total_revenue?.toLocaleString()}
               </p>
             </div>
@@ -465,30 +459,28 @@ export default function OccupancyPage() {
 
       {/* Charts */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 transition-colors border border-gray-200 dark:border-gray-700">
-          <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">
+        <div className="card p-6">
+          <h3 className="text-lg font-semibold text-foreground mb-4">
             Occupancy by Region
-          </h2>
+          </h3>
           <div className="h-80">
             <Bar data={regionalChartData} options={baseChartOptions} />
           </div>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 transition-colors border border-gray-200 dark:border-gray-700">
-          <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">
+        <div className="card p-6">
+          <h3 className="text-lg font-semibold text-foreground mb-4">
             Weekly Occupancy Pattern
-          </h2>
-          <div className="h-80 flex items-center justify-center">
-            <div className="w-full max-w-sm">
-              <Doughnut data={weeklyChartData} options={doughnutChartOptions} />
-            </div>
+          </h3>
+          <div className="h-80">
+            <Doughnut data={weeklyChartData} options={doughnutChartOptions} />
           </div>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 lg:col-span-2 transition-colors border border-gray-200 dark:border-gray-700">
-          <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">
+        <div className="card p-6 lg:col-span-2">
+          <h3 className="text-lg font-semibold text-foreground mb-4">
             Monthly Occupancy Trends
-          </h2>
+          </h3>
           <div className="h-80">
             <Line data={monthlyChartData} options={lineChartOptions} />
           </div>
@@ -496,23 +488,38 @@ export default function OccupancyPage() {
       </div>
 
       {/* Insights */}
-      {data?.insights && data.insights.length > 0 && (
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 transition-colors border border-gray-200 dark:border-gray-700">
-          <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">
-            Key Insights
-          </h2>
-          <div className="grid gap-4">
-            {data.insights.map((insight, index) => (
-              <div
-                key={index}
-                className="p-4 bg-green-50 dark:bg-green-900/20 border-l-4 border-green-400 dark:border-green-500 text-green-800 dark:text-green-300 rounded-r-lg"
-              >
-                <p className="leading-relaxed">{insight}</p>
+      <div className="card p-6">
+        <h3 className="text-lg font-semibold text-foreground mb-4">
+          Key Insights
+        </h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {data?.insights?.map((insight, index) => (
+            <div
+              key={index}
+              className="flex items-start space-x-3 p-4 bg-surface-secondary rounded-xl"
+            >
+              <div className="w-6 h-6 bg-secondary-100 dark:bg-secondary-900/30 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg
+                  className="w-3 h-3 text-secondary-600 dark:text-secondary-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+                  />
+                </svg>
               </div>
-            ))}
-          </div>
+              <p className="text-sm text-foreground leading-relaxed">
+                {insight}
+              </p>
+            </div>
+          ))}
         </div>
-      )}
+      </div>
     </div>
   );
 }

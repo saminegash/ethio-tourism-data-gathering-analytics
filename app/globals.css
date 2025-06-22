@@ -1,21 +1,72 @@
 @import "tailwindcss";
 
-/* Light theme (default) */
+/* Ethiopian Tourism Theme - Light Mode (default) */
 @theme {
   --color-background: #ffffff;
-  --color-foreground: #111827;
+  --color-foreground: #1a1a1a;
 
-  /* Gray colors for light theme */
-  --color-gray-50: #f9fafb;
-  --color-gray-100: #f3f4f6;
-  --color-gray-200: #e5e7eb;
-  --color-gray-300: #d1d5db;
-  --color-gray-400: #9ca3af;
-  --color-gray-500: #6b7280;
-  --color-gray-600: #4b5563;
-  --color-gray-700: #374151;
-  --color-gray-800: #1f2937;
-  --color-gray-900: #111827;
+  /* Ethiopian Primary Colors (Green from flag) */
+  --color-primary-50: #f0f9f3;
+  --color-primary-100: #dcf2e0;
+  --color-primary-200: #bce5c7;
+  --color-primary-300: #8fd3a0;
+  --color-primary-400: #5cb871;
+  --color-primary-500: #3a9d4f;
+  --color-primary-600: #2d7f3f;
+  --color-primary-700: #266635;
+  --color-primary-800: #22522d;
+  --color-primary-900: #1e4426;
+
+  /* Ethiopian Secondary Colors (Yellow from flag) */
+  --color-secondary-50: #fefcf0;
+  --color-secondary-100: #fef7d3;
+  --color-secondary-200: #fdeaa7;
+  --color-secondary-300: #fbd970;
+  --color-secondary-400: #f8c237;
+  --color-secondary-500: #f2a814;
+  --color-secondary-600: #d7850a;
+  --color-secondary-700: #b3630c;
+  --color-secondary-800: #914e11;
+  --color-secondary-900: #784113;
+
+  /* Ethiopian Accent Colors (Red from flag) */
+  --color-accent-50: #fef2f2;
+  --color-accent-100: #fee2e2;
+  --color-accent-200: #fecaca;
+  --color-accent-300: #fca5a5;
+  --color-accent-400: #f87171;
+  --color-accent-500: #ef4444;
+  --color-accent-600: #dc2626;
+  --color-accent-700: #b91c1c;
+  --color-accent-800: #991b1b;
+  --color-accent-900: #7f1d1d;
+
+  /* Enhanced Gray colors for light theme */
+  --color-gray-50: #fafafa;
+  --color-gray-100: #f4f4f5;
+  --color-gray-200: #e4e4e7;
+  --color-gray-300: #d4d4d8;
+  --color-gray-400: #a1a1aa;
+  --color-gray-500: #71717a;
+  --color-gray-600: #52525b;
+  --color-gray-700: #3f3f46;
+  --color-gray-800: #27272a;
+  --color-gray-900: #18181b;
+
+  /* Surface colors */
+  --surface-primary: #ffffff;
+  --surface-secondary: #fafafa;
+  --surface-tertiary: #f4f4f5;
+
+  /* Border colors */
+  --border-primary: #e4e4e7;
+  --border-secondary: #d4d4d8;
+
+  /* Semantic colors */
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  --color-info: #3b82f6;
 
   /* Blue colors */
   --color-blue-50: #eff6ff;
@@ -78,40 +129,143 @@
   --color-purple-900: #581c87;
 }
 
-/* Dark theme */
+/* Ethiopian Tourism Theme - Dark Mode */
 .dark {
-  --color-background: #0f172a;
-  --color-foreground: #f1f5f9;
+  --color-background: #0a0a0a;
+  --color-foreground: #fafafa;
 
-  /* Gray colors for dark theme - adjusted for better contrast */
-  --color-gray-50: #1e293b;
-  --color-gray-100: #334155;
-  --color-gray-200: #475569;
-  --color-gray-300: #64748b;
-  --color-gray-400: #94a3b8;
-  --color-gray-500: #cbd5e1;
-  --color-gray-600: #e2e8f0;
-  --color-gray-700: #f1f5f9;
-  --color-gray-800: #f8fafc;
-  --color-gray-900: #ffffff;
+  /* Ethiopian Primary Colors (Green) - Dark Mode */
+  --color-primary-50: #1e4426;
+  --color-primary-100: #22522d;
+  --color-primary-200: #266635;
+  --color-primary-300: #2d7f3f;
+  --color-primary-400: #3a9d4f;
+  --color-primary-500: #5cb871;
+  --color-primary-600: #8fd3a0;
+  --color-primary-700: #bce5c7;
+  --color-primary-800: #dcf2e0;
+  --color-primary-900: #f0f9f3;
+
+  /* Ethiopian Secondary Colors (Yellow) - Dark Mode */
+  --color-secondary-50: #784113;
+  --color-secondary-100: #914e11;
+  --color-secondary-200: #b3630c;
+  --color-secondary-300: #d7850a;
+  --color-secondary-400: #f2a814;
+  --color-secondary-500: #f8c237;
+  --color-secondary-600: #fbd970;
+  --color-secondary-700: #fdeaa7;
+  --color-secondary-800: #fef7d3;
+  --color-secondary-900: #fefcf0;
+
+  /* Ethiopian Accent Colors (Red) - Dark Mode */
+  --color-accent-50: #7f1d1d;
+  --color-accent-100: #991b1b;
+  --color-accent-200: #b91c1c;
+  --color-accent-300: #dc2626;
+  --color-accent-400: #ef4444;
+  --color-accent-500: #f87171;
+  --color-accent-600: #fca5a5;
+  --color-accent-700: #fecaca;
+  --color-accent-800: #fee2e2;
+  --color-accent-900: #fef2f2;
+
+  /* Enhanced Gray colors for dark theme */
+  --color-gray-50: #18181b;
+  --color-gray-100: #27272a;
+  --color-gray-200: #3f3f46;
+  --color-gray-300: #52525b;
+  --color-gray-400: #71717a;
+  --color-gray-500: #a1a1aa;
+  --color-gray-600: #d4d4d8;
+  --color-gray-700: #e4e4e7;
+  --color-gray-800: #f4f4f5;
+  --color-gray-900: #fafafa;
+
+  /* Surface colors - Dark Mode */
+  --surface-primary: #0a0a0a;
+  --surface-secondary: #18181b;
+  --surface-tertiary: #27272a;
+
+  /* Border colors - Dark Mode */
+  --border-primary: #3f3f46;
+  --border-secondary: #52525b;
+
+  /* Semantic colors - Dark Mode */
+  --color-success: #22c55e;
+  --color-warning: #fbbf24;
+  --color-error: #f87171;
+  --color-info: #60a5fa;
 }
 
 /* System preference dark theme */
 @media (prefers-color-scheme: dark) {
   :root:not(.light) {
-    --color-background: #0f172a;
-    --color-foreground: #f1f5f9;
+    --color-background: #0a0a0a;
+    --color-foreground: #fafafa;
 
-    --color-gray-50: #1e293b;
-    --color-gray-100: #334155;
-    --color-gray-200: #475569;
-    --color-gray-300: #64748b;
-    --color-gray-400: #94a3b8;
-    --color-gray-500: #cbd5e1;
-    --color-gray-600: #e2e8f0;
-    --color-gray-700: #f1f5f9;
-    --color-gray-800: #f8fafc;
-    --color-gray-900: #ffffff;
+    /* Ethiopian Primary Colors (Green) - Dark Mode */
+    --color-primary-50: #1e4426;
+    --color-primary-100: #22522d;
+    --color-primary-200: #266635;
+    --color-primary-300: #2d7f3f;
+    --color-primary-400: #3a9d4f;
+    --color-primary-500: #5cb871;
+    --color-primary-600: #8fd3a0;
+    --color-primary-700: #bce5c7;
+    --color-primary-800: #dcf2e0;
+    --color-primary-900: #f0f9f3;
+
+    /* Ethiopian Secondary Colors (Yellow) - Dark Mode */
+    --color-secondary-50: #784113;
+    --color-secondary-100: #914e11;
+    --color-secondary-200: #b3630c;
+    --color-secondary-300: #d7850a;
+    --color-secondary-400: #f2a814;
+    --color-secondary-500: #f8c237;
+    --color-secondary-600: #fbd970;
+    --color-secondary-700: #fdeaa7;
+    --color-secondary-800: #fef7d3;
+    --color-secondary-900: #fefcf0;
+
+    /* Ethiopian Accent Colors (Red) - Dark Mode */
+    --color-accent-50: #7f1d1d;
+    --color-accent-100: #991b1b;
+    --color-accent-200: #b91c1c;
+    --color-accent-300: #dc2626;
+    --color-accent-400: #ef4444;
+    --color-accent-500: #f87171;
+    --color-accent-600: #fca5a5;
+    --color-accent-700: #fecaca;
+    --color-accent-800: #fee2e2;
+    --color-accent-900: #fef2f2;
+
+    /* Enhanced Gray colors for dark theme */
+    --color-gray-50: #18181b;
+    --color-gray-100: #27272a;
+    --color-gray-200: #3f3f46;
+    --color-gray-300: #52525b;
+    --color-gray-400: #71717a;
+    --color-gray-500: #a1a1aa;
+    --color-gray-600: #d4d4d8;
+    --color-gray-700: #e4e4e7;
+    --color-gray-800: #f4f4f5;
+    --color-gray-900: #fafafa;
+
+    /* Surface colors - Dark Mode */
+    --surface-primary: #0a0a0a;
+    --surface-secondary: #18181b;
+    --surface-tertiary: #27272a;
+
+    /* Border colors - Dark Mode */
+    --border-primary: #3f3f46;
+    --border-secondary: #52525b;
+
+    /* Semantic colors - Dark Mode */
+    --color-success: #22c55e;
+    --color-warning: #fbbf24;
+    --color-error: #f87171;
+    --color-info: #60a5fa;
   }
 }
 
@@ -133,46 +287,168 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-feature-settings: "rlig" 1, "calt" 1;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, sans-serif;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+
+  /* Ethiopian theme utilities */
+  .bg-ethiopia-gradient {
+    background: linear-gradient(135deg, #3a9d4f 0%, #f2a814 50%, #ef4444 100%);
+  }
+
+  .bg-ethiopia-subtle {
+    background: linear-gradient(135deg, #f0f9f3 0%, #fefcf0 50%, #fef2f2 100%);
+  }
+
+  .bg-ethiopia-dark {
+    background: linear-gradient(135deg, #1e4426 0%, #784113 50%, #7f1d1d 100%);
+  }
+
+  .shadow-ethiopian {
+    box-shadow: 0 4px 6px -1px rgba(58, 157, 79, 0.1),
+      0 2px 4px -1px rgba(58, 157, 79, 0.06);
+  }
+
+  .dark .shadow-ethiopian {
+    box-shadow: 0 4px 6px -1px rgba(58, 157, 79, 0.3),
+      0 2px 4px -1px rgba(58, 157, 79, 0.2);
+  }
 }
 
-/* Custom scrollbar styling */
+/* Enhanced scrollbar styling */
 ::-webkit-scrollbar {
   width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-gray-100);
+  background: var(--surface-secondary);
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-gray-300);
-  border-radius: 9999px;
+  background: var(--color-primary-500);
+  border-radius: 4px;
+  border: 2px solid var(--surface-secondary);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-gray-400);
+  background: var(--color-primary-600);
 }
 
-/* Force light theme styles */
-.light {
-  --color-background: #ffffff;
-  --color-foreground: #111827;
+::-webkit-scrollbar-corner {
+  background: var(--surface-secondary);
+}
 
-  --color-gray-50: #f9fafb;
-  --color-gray-100: #f3f4f6;
-  --color-gray-200: #e5e7eb;
-  --color-gray-300: #d1d5db;
-  --color-gray-400: #9ca3af;
-  --color-gray-500: #6b7280;
-  --color-gray-600: #4b5563;
-  --color-gray-700: #374151;
-  --color-gray-800: #1f2937;
-  --color-gray-900: #111827;
+/* Selection styling */
+::selection {
+  background-color: var(--color-primary-500);
+  color: white;
+}
+
+::-moz-selection {
+  background-color: var(--color-primary-500);
+  color: white;
+}
+
+/* Focus ring styling */
+.focus-ring {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
+}
+
+/* Improved animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.animate-slideIn {
+  animation: slideIn 0.3s ease-out;
+}
+
+/* Enhanced card styling */
+.card {
+  background: var(--surface-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transform: translateY(-1px);
+}
+
+.dark .card {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+}
+
+.dark .card:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.4),
+    0 2px 4px -1px rgba(0, 0, 0, 0.3);
+}
+
+/* Button enhancements */
+.btn-primary {
+  background: var(--color-primary-500);
+  color: white;
+  border: 1px solid var(--color-primary-500);
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+  background: var(--color-primary-600);
+  border-color: var(--color-primary-600);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(58, 157, 79, 0.2);
+}
+
+.btn-secondary {
+  background: var(--color-secondary-500);
+  color: var(--color-secondary-900);
+  border: 1px solid var(--color-secondary-500);
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background: var(--color-secondary-600);
+  border-color: var(--color-secondary-600);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(242, 168, 20, 0.2);
 }

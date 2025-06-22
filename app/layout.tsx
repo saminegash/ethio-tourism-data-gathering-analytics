@@ -29,14 +29,14 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} min-h-screen`}
+        className={`${geistSans.variable} ${geistMono.variable} min-h-screen bg-surface-secondary`}
       >
         <ReduxProvider>
           <AuthProvider>
             <ThemeProvider>
-              <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
+              <div className="min-h-screen bg-surface-secondary transition-colors duration-300">
                 <Header />
-                <main className="bg-gray-50 dark:bg-gray-900">{children}</main>
+                <main className="bg-surface-secondary">{children}</main>
               </div>
             </ThemeProvider>
           </AuthProvider>

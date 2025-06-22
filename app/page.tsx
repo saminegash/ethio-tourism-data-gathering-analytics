@@ -4,44 +4,57 @@ export default function HomePage() {
   return (
     <div className="max-w-7xl mx-auto">
       {/* Hero Section */}
-      <div className="px-6 py-16 text-center">
-        <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
-          Ethiopia Tourism Analytics
-        </h1>
-        <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto">
-          Comprehensive data analytics platform for tourism insights in
-          Ethiopia. Upload CSV data and get real-time analytics on arrivals,
-          occupancy, visits, and customer satisfaction.
-        </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link
-            href="/upload"
-            className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white px-8 py-3 rounded-lg transition-colors"
-          >
-            Upload Data
-          </Link>
-          <Link
-            href="/dashboard/arrivals"
-            className="bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 px-8 py-3 rounded-lg transition-colors"
-          >
-            View Dashboards
-          </Link>
+      <div className="px-6 py-20 text-center bg-ethiopia-subtle rounded-3xl mx-6 mt-8 relative overflow-hidden">
+        <div className="absolute inset-0 bg-ethiopia-gradient opacity-5"></div>
+        <div className="relative z-10">
+          <div className="inline-flex items-center space-x-2 bg-primary-50 text-primary-700 px-4 py-2 rounded-full text-sm font-medium mb-6">
+            <span className="text-lg">🇪🇹</span>
+            <span>Ethiopia Tourism Analytics</span>
+          </div>
+          <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6 bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">
+            Ethiopia Tourism Analytics
+          </h1>
+          <p className="text-xl text-gray-600 dark:text-gray-400 mb-10 max-w-3xl mx-auto leading-relaxed">
+            Comprehensive data analytics platform for tourism insights in
+            Ethiopia. Upload CSV data and get real-time analytics on arrivals,
+            occupancy, visits, and customer satisfaction.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link
+              href="/upload"
+              className="btn-primary animate-fadeIn hover:shadow-glow"
+            >
+              Upload Data
+            </Link>
+            <Link
+              href="/dashboard/arrivals"
+              className="bg-surface-primary hover:bg-gray-50 dark:bg-surface-tertiary dark:hover:bg-gray-700 text-foreground border border-border-primary px-8 py-3 rounded-lg transition-all duration-200 hover:shadow-soft"
+            >
+              View Dashboards
+            </Link>
+          </div>
         </div>
       </div>
 
       {/* Features Section */}
-      <div className="px-6 py-16">
-        <h2 className="text-3xl font-bold text-center mb-12 text-gray-900 dark:text-white">
-          Analytics Dashboards
-        </h2>
+      <div className="px-6 py-20">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl font-bold mb-4 text-foreground">
+            Analytics Dashboards
+          </h2>
+          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            Explore comprehensive tourism data through our interactive
+            dashboards designed specifically for Ethiopian tourism insights.
+          </p>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Arrivals Card */}
-          <Link href="/dashboard/arrivals" className="group">
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg dark:shadow-gray-900/20 p-6 transition-all duration-200">
-              <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-4 group-hover:bg-blue-200 dark:group-hover:bg-blue-900/50 transition-colors">
+          <Link href="/dashboard/arrivals" className="group animate-fadeIn">
+            <div className="card p-6 group-hover:border-primary-200 dark:group-hover:border-primary-800">
+              <div className="w-12 h-12 bg-primary-50 dark:bg-primary-900/20 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary-100 dark:group-hover:bg-primary-900/40 transition-colors">
                 <svg
-                  className="w-6 h-6 text-blue-600 dark:text-blue-400"
+                  className="w-6 h-6 text-primary-600 dark:text-primary-400"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -54,10 +67,10 @@ export default function HomePage() {
                   />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">
+              <h3 className="text-xl font-semibold mb-2 text-foreground">
                 Flight Arrivals
               </h3>
-              <p className="text-gray-600 dark:text-gray-300">
+              <p className="text-gray-600 dark:text-gray-400">
                 Track flight arrivals, passenger volumes, airline performance,
                 and origin patterns.
               </p>
@@ -65,11 +78,15 @@ export default function HomePage() {
           </Link>
 
           {/* Occupancy Card */}
-          <Link href="/dashboard/occupancy" className="group">
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg dark:shadow-gray-900/20 p-6 transition-all duration-200">
-              <div className="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center mb-4 group-hover:bg-green-200 dark:group-hover:bg-green-900/50 transition-colors">
+          <Link
+            href="/dashboard/occupancy"
+            className="group animate-fadeIn"
+            style={{ animationDelay: "0.1s" }}
+          >
+            <div className="card p-6 group-hover:border-secondary-200 dark:group-hover:border-secondary-800">
+              <div className="w-12 h-12 bg-secondary-50 dark:bg-secondary-900/20 rounded-xl flex items-center justify-center mb-4 group-hover:bg-secondary-100 dark:group-hover:bg-secondary-900/40 transition-colors">
                 <svg
-                  className="w-6 h-6 text-green-600 dark:text-green-400"
+                  className="w-6 h-6 text-secondary-600 dark:text-secondary-400"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -82,10 +99,10 @@ export default function HomePage() {
                   />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">
+              <h3 className="text-xl font-semibold mb-2 text-foreground">
                 Hotel Occupancy
               </h3>
-              <p className="text-gray-600 dark:text-gray-300">
+              <p className="text-gray-600 dark:text-gray-400">
                 Monitor hotel occupancy rates, regional performance, and revenue
                 trends.
               </p>
@@ -93,11 +110,15 @@ export default function HomePage() {
           </Link>
 
           {/* Visits Card */}
-          <Link href="/dashboard/visits" className="group">
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg dark:shadow-gray-900/20 p-6 transition-all duration-200">
-              <div className="w-12 h-12 bg-red-100 dark:bg-red-900/30 rounded-lg flex items-center justify-center mb-4 group-hover:bg-red-200 dark:group-hover:bg-red-900/50 transition-colors">
+          <Link
+            href="/dashboard/visits"
+            className="group animate-fadeIn"
+            style={{ animationDelay: "0.2s" }}
+          >
+            <div className="card p-6 group-hover:border-accent-200 dark:group-hover:border-accent-800">
+              <div className="w-12 h-12 bg-accent-50 dark:bg-accent-900/20 rounded-xl flex items-center justify-center mb-4 group-hover:bg-accent-100 dark:group-hover:bg-accent-900/40 transition-colors">
                 <svg
-                  className="w-6 h-6 text-red-600 dark:text-red-400"
+                  className="w-6 h-6 text-accent-600 dark:text-accent-400"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -110,10 +131,10 @@ export default function HomePage() {
                   />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">
+              <h3 className="text-xl font-semibold mb-2 text-foreground">
                 Tourist Visits
               </h3>
-              <p className="text-gray-600 dark:text-gray-300">
+              <p className="text-gray-600 dark:text-gray-400">
                 Analyze attraction visits, dwell times, and visitor
                 demographics.
               </p>
@@ -121,9 +142,13 @@ export default function HomePage() {
           </Link>
 
           {/* Surveys Card */}
-          <Link href="/dashboard/surveys" className="group">
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg dark:shadow-gray-900/20 p-6 transition-all duration-200">
-              <div className="w-12 h-12 bg-orange-100 dark:bg-orange-900/30 rounded-lg flex items-center justify-center mb-4 group-hover:bg-orange-200 dark:group-hover:bg-orange-900/50 transition-colors">
+          <Link
+            href="/dashboard/surveys"
+            className="group animate-fadeIn"
+            style={{ animationDelay: "0.3s" }}
+          >
+            <div className="card p-6 group-hover:border-orange-200 dark:group-hover:border-orange-800">
+              <div className="w-12 h-12 bg-orange-50 dark:bg-orange-900/20 rounded-xl flex items-center justify-center mb-4 group-hover:bg-orange-100 dark:group-hover:bg-orange-900/40 transition-colors">
                 <svg
                   className="w-6 h-6 text-orange-600 dark:text-orange-400"
                   fill="none"
@@ -138,10 +163,10 @@ export default function HomePage() {
                   />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">
+              <h3 className="text-xl font-semibold mb-2 text-foreground">
                 Customer Surveys
               </h3>
-              <p className="text-gray-600 dark:text-gray-300">
+              <p className="text-gray-600 dark:text-gray-400">
                 Track customer satisfaction, ratings, and sentiment analysis.
               </p>
             </div>
@@ -150,17 +175,23 @@ export default function HomePage() {
       </div>
 
       {/* Features List */}
-      <div className="px-6 py-16 bg-white dark:bg-gray-800 transition-colors">
+      <div className="px-6 py-20 bg-surface-primary border-t border-border-primary">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12 text-gray-900 dark:text-white">
-            Platform Features
-          </h2>
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold mb-4 text-foreground">
+              Platform Features
+            </h2>
+            <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+              Built with modern technology and Ethiopian tourism industry
+              insights to provide comprehensive analytics.
+            </p>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="flex items-start space-x-4">
-              <div className="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center flex-shrink-0">
+            <div className="flex items-start space-x-4 animate-slideIn">
+              <div className="w-10 h-10 bg-primary-50 dark:bg-primary-900/20 rounded-xl flex items-center justify-center flex-shrink-0">
                 <svg
-                  className="w-4 h-4 text-blue-600 dark:text-blue-400"
+                  className="w-5 h-5 text-primary-600 dark:text-primary-400"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -174,20 +205,23 @@ export default function HomePage() {
                 </svg>
               </div>
               <div>
-                <h3 className="font-semibold mb-2 text-gray-900 dark:text-white">
+                <h3 className="font-semibold mb-2 text-foreground">
                   CSV Data Upload
                 </h3>
-                <p className="text-gray-600 dark:text-gray-300">
+                <p className="text-gray-600 dark:text-gray-400">
                   Easy drag-and-drop CSV file upload with automatic data
                   processing and validation.
                 </p>
               </div>
             </div>
 
-            <div className="flex items-start space-x-4">
-              <div className="w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center flex-shrink-0">
+            <div
+              className="flex items-start space-x-4 animate-slideIn"
+              style={{ animationDelay: "0.1s" }}
+            >
+              <div className="w-10 h-10 bg-secondary-50 dark:bg-secondary-900/20 rounded-xl flex items-center justify-center flex-shrink-0">
                 <svg
-                  className="w-4 h-4 text-green-600 dark:text-green-400"
+                  className="w-5 h-5 text-secondary-600 dark:text-secondary-400"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -201,20 +235,23 @@ export default function HomePage() {
                 </svg>
               </div>
               <div>
-                <h3 className="font-semibold mb-2 text-gray-900 dark:text-white">
+                <h3 className="font-semibold mb-2 text-foreground">
                   Real-time Analytics
                 </h3>
-                <p className="text-gray-600 dark:text-gray-300">
-                  Instant data processing with Python analytics engine and
-                  real-time visualizations.
+                <p className="text-gray-600 dark:text-gray-400">
+                  Instant data processing with Python analytics engine for
+                  immediate insights.
                 </p>
               </div>
             </div>
 
-            <div className="flex items-start space-x-4">
-              <div className="w-8 h-8 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center flex-shrink-0">
+            <div
+              className="flex items-start space-x-4 animate-slideIn"
+              style={{ animationDelay: "0.2s" }}
+            >
+              <div className="w-10 h-10 bg-accent-50 dark:bg-accent-900/20 rounded-xl flex items-center justify-center flex-shrink-0">
                 <svg
-                  className="w-4 h-4 text-purple-600 dark:text-purple-400"
+                  className="w-5 h-5 text-accent-600 dark:text-accent-400"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -228,20 +265,23 @@ export default function HomePage() {
                 </svg>
               </div>
               <div>
-                <h3 className="font-semibold mb-2 text-gray-900 dark:text-white">
-                  Interactive Charts
+                <h3 className="font-semibold mb-2 text-foreground">
+                  Interactive Dashboards
                 </h3>
-                <p className="text-gray-600 dark:text-gray-300">
-                  Beautiful, responsive charts using Chart.js with multiple
-                  visualization types.
+                <p className="text-gray-600 dark:text-gray-400">
+                  Beautiful, responsive charts using Chart.js with Ethiopian
+                  color themes.
                 </p>
               </div>
             </div>
 
-            <div className="flex items-start space-x-4">
-              <div className="w-8 h-8 bg-orange-100 dark:bg-orange-900/30 rounded-full flex items-center justify-center flex-shrink-0">
+            <div
+              className="flex items-start space-x-4 animate-slideIn"
+              style={{ animationDelay: "0.3s" }}
+            >
+              <div className="w-10 h-10 bg-purple-50 dark:bg-purple-900/20 rounded-xl flex items-center justify-center flex-shrink-0">
                 <svg
-                  className="w-4 h-4 text-orange-600 dark:text-orange-400"
+                  className="w-5 h-5 text-purple-600 dark:text-purple-400"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -250,17 +290,77 @@ export default function HomePage() {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth={2}
-                    d="M13 10V3L4 14h7v7l9-11h-7z"
+                    d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
                   />
                 </svg>
               </div>
               <div>
-                <h3 className="font-semibold mb-2 text-gray-900 dark:text-white">
+                <h3 className="font-semibold mb-2 text-foreground">
                   AI-Powered Insights
                 </h3>
-                <p className="text-gray-600 dark:text-gray-300">
-                  Automated insights generation with trend detection and
-                  actionable recommendations.
+                <p className="text-gray-600 dark:text-gray-400">
+                  Automated insights generation with trend detection for
+                  Ethiopian tourism patterns.
+                </p>
+              </div>
+            </div>
+
+            <div
+              className="flex items-start space-x-4 animate-slideIn"
+              style={{ animationDelay: "0.4s" }}
+            >
+              <div className="w-10 h-10 bg-blue-50 dark:bg-blue-900/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                <svg
+                  className="w-5 h-5 text-blue-600 dark:text-blue-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+                  />
+                </svg>
+              </div>
+              <div>
+                <h3 className="font-semibold mb-2 text-foreground">
+                  Light & Dark Themes
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400">
+                  Ethiopian flag-inspired color palette with automatic system
+                  theme detection.
+                </p>
+              </div>
+            </div>
+
+            <div
+              className="flex items-start space-x-4 animate-slideIn"
+              style={{ animationDelay: "0.5s" }}
+            >
+              <div className="w-10 h-10 bg-green-50 dark:bg-green-900/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                <svg
+                  className="w-5 h-5 text-green-600 dark:text-green-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                  />
+                </svg>
+              </div>
+              <div>
+                <h3 className="font-semibold mb-2 text-foreground">
+                  Secure & Scalable
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400">
+                  Built with Supabase for secure data storage and real-time
+                  collaboration features.
                 </p>
               </div>
             </div>
