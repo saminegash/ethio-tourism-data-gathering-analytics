@@ -6,9 +6,10 @@ import { createServerClient } from "@supabase/ssr";
 // PATCH - Update user role
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
+    const params = await context.params;
     const { id: userId } = params;
 
     // Check if service role is available
@@ -112,9 +113,10 @@ export async function PATCH(
 // DELETE - Delete user
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
+    const params = await context.params;
     const { id: userId } = params;
 
     // Check if service role is available
