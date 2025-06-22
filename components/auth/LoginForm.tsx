@@ -47,8 +47,8 @@ export function LoginForm() {
         <div>
           <p className="font-medium">Invalid login credentials</p>
           <p className="text-sm mt-1">
-            Please check your email and password. If you don't have an account,
-            an admin needs to create one for you.
+            Please check your email and password. If you don&apos;t have an
+            account, an admin needs to create one for you.
           </p>
         </div>
       );
@@ -122,7 +122,8 @@ export function LoginForm() {
         </h3>
         <div className="text-xs text-blue-700 space-y-1">
           <p>
-            • If you get "Invalid login credentials", the user doesn't exist
+            • If you get &quot;Invalid login credentials&quot;, the user
+            doesn&apos;t exist
           </p>
           <p>• Admin users need to be created manually first</p>
           <p>

@@ -179,7 +179,7 @@ export default function DashboardPage() {
               </h2>
               <p className="text-gray-600 mb-4">
                 This platform provides comprehensive analytics and insights for
-                Ethiopia's tourism industry. Based on your role as a{" "}
+                Ethiopia&apos;s tourism industry. Based on your role as a{" "}
                 <strong>{getRoleLabel(userRole)}</strong>, you have access to
                 specific features and data management capabilities.
               </p>
