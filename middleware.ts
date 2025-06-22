@@ -178,20 +178,16 @@ export async function middleware(req: NextRequest) {
 
   // Get user data
   const {
-    data: { session },
-  } = await supabase.auth.getSession();
-
-  const user = session?.user ?? null;
+    data: { user },
+  } = await supabase.auth.getUser();
 
   // Debug logging for login page
   if (pathname === "/login") {
     console.log("Middleware debug:", {
       pathname,
-      hasSession: !!session,
       hasUser: !!user,
       userId: user?.id,
       redirectParam: req.nextUrl.searchParams.get("redirect"),
-      sessionExpiry: session?.expires_at,
     });
   }
 

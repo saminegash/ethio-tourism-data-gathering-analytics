@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../lib/store/hooks";
 import { signIn, clearError } from "../../lib/store/slices/authSlice";
 import {
   selectAuthLoading,
   selectAuthError,
+  selectIsAuthenticated,
 } from "../../lib/store/selectors/authSelectors";
 
 export function LoginForm() {
@@ -14,6 +15,25 @@ export function LoginForm() {
   const dispatch = useAppDispatch();
   const loading = useAppSelector(selectAuthLoading);
   const error = useAppSelector(selectAuthError);
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
+
+  // Redirect after successful authentication
+  useEffect(() => {
+    if (isAuthenticated) {
+      // Small delay to ensure the auth state is fully set
+      const redirectTimer = setTimeout(() => {
+        // Get the redirect parameter from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const redirectTo = urlParams.get("redirect") || "/dashboard";
+
+        // Use window.location.href to trigger a full page navigation
+        // This will cause the middleware to run and handle the redirect properly
+        window.location.href = redirectTo;
+      }, 100);
+
+      return () => clearTimeout(redirectTimer);
+    }
+  }, [isAuthenticated]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

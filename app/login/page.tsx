@@ -2,10 +2,14 @@
 
 import { LoginForm } from "../../components/auth/LoginForm";
 import { useAppSelector } from "../../lib/store/hooks";
-import { selectIsAuthenticated } from "../../lib/store/selectors/authSelectors";
+import {
+  selectIsAuthenticated,
+  selectAuthLoading,
+} from "../../lib/store/selectors/authSelectors";
 
 export default function LoginPage() {
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
+  const authLoading = useAppSelector(selectAuthLoading);
 
   // If authenticated, show redirecting state (middleware will handle the redirect)
   if (isAuthenticated) {
@@ -17,11 +21,11 @@ export default function LoginPage() {
               Welcome back!
             </h2>
             <p className="mt-2 text-center text-sm text-gray-600">
-              Redirecting...
+              Redirecting to your dashboard...
             </p>
             {/* Loading spinner */}
             <div className="flex justify-center mt-4">
-              <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600"></div>
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
             </div>
           </div>
         </div>
