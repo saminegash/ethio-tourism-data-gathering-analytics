@@ -28,7 +28,7 @@ export default function HomePage() {
             </Link>
             <Link
               href="/dashboard/arrivals"
-              className="bg-surface-primary hover:bg-gray-50 dark:bg-surface-tertiary dark:hover:bg-gray-700 text-foreground border border-border-primary px-8 py-3 rounded-lg transition-all duration-200 hover:shadow-soft"
+              className="bg-surface-primary text-black hover:bg-black dark:bg-surface-tertiary dark:hover:bg-gray-700 text-foreground border border-border-primary px-8 py-3 rounded-lg transition-all duration-200 hover:shadow-soft"
             >
               View Dashboards
             </Link>

@@ -9,9 +9,10 @@ const DEFAULT_PASSWORD = "TempPassword123!";
 // POST - Reset user password
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
+    const params = await context.params;
     const { id: userId } = params;
 
     // Check if service role is available
