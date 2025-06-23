@@ -73,7 +73,7 @@ export function ThemeSwitcher() {
         )}
       </button>
 
-      <button
+      {/* <button
         onClick={() => setTheme("system")}
         className={`group relative p-3 rounded-lg transition-all duration-200 ${
           theme === "system"
@@ -99,7 +99,7 @@ export function ThemeSwitcher() {
         {theme === "system" && (
           <div className="absolute -top-1 -right-1 w-2 h-2 bg-primary-500 rounded-full animate-pulse"></div>
         )}
-      </button>
+      </button> */}
     </div>
   );
 }

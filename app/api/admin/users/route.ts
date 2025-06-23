@@ -1,5 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getSupabaseAdmin } from "../../../../lib/supabase";
+import {
+  getSupabaseAdmin,
+  debugSupabaseConfig,
+  validateServiceRoleKey,
+} from "../../../../lib/supabase";
 import { cookies } from "next/headers";
 import { createServerClient } from "@supabase/ssr";
 
@@ -16,12 +20,36 @@ const DEFAULT_PASSWORD = "TempPassword123!";
 
 export async function POST(request: NextRequest) {
   try {
-    // Check if service role is available
+    // Debug configuration in development
+    if (process.env.NODE_ENV === "development") {
+      debugSupabaseConfig();
+    }
+
+    // Check if service role is available with detailed error reporting
     let supabaseAdmin;
     try {
       supabaseAdmin = getSupabaseAdmin();
+
+      // Additional validation
+      if (!validateServiceRoleKey()) {
+        console.error("❌ Service role key format appears invalid");
+        return NextResponse.json(
+          {
+            error:
+              "Service role key configuration issue. Please check your SUPABASE_SERVICE_ROLE_KEY format.",
+          },
+          { status: 500 }
+        );
+      }
     } catch (error: any) {
-      return NextResponse.json({ error: error.message }, { status: 500 });
+      console.error("❌ Service role setup error:", error.message);
+      return NextResponse.json(
+        {
+          error: error.message,
+          hint: "Please ensure SUPABASE_SERVICE_ROLE_KEY is properly configured in your .env.local file",
+        },
+        { status: 500 }
+      );
     }
 
     // Get the authenticated user from the request
@@ -102,7 +130,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Create the auth user using service role
+    // Create the auth user using service role with better error handling
     const { data: authData, error: createAuthError } =
       await supabaseAdmin.auth.admin.createUser({
         email: userData.email,
@@ -116,8 +144,23 @@ export async function POST(request: NextRequest) {
       });
 
     if (createAuthError) {
+      console.error("❌ User creation error:", createAuthError);
+
+      // Provide more specific error messages
+      let errorMessage = createAuthError.message;
+      if (createAuthError.message.includes("Invalid API key")) {
+        errorMessage =
+          "Service role authentication failed. Please verify your SUPABASE_SERVICE_ROLE_KEY is correct.";
+      } else if (createAuthError.message.includes("User already registered")) {
+        errorMessage = "A user with this email already exists.";
+      }
+
       return NextResponse.json(
-        { error: `Failed to create user: ${createAuthError.message}` },
+        {
+          error: `Failed to create user: ${errorMessage}`,
+          original_error: createAuthError.message,
+          hint: "Check your Supabase service role key configuration",
+        },
         { status: 400 }
       );
     }

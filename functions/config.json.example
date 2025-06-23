@@ -1,0 +1,74 @@
+{
+  "supabase_url": "https://your-project.supabase.co",
+  "supabase_key": "your-service-role-key",
+  "openai_api_key": "your-openai-api-key",
+  "forecast_days": 30,
+  "data_retention_days": 365,
+  "alert_thresholds": {
+    "occupancy_low": 60.0,
+    "api_response_high": 500.0,
+    "revenue_decline_days": 7,
+    "data_quality_minimum": 0.95
+  },
+  "notification_channels": {
+    "email": ["admin@yourcompany.com", "analytics@yourcompany.com"],
+    "slack_webhook": "https://hooks.slack.com/services/YOUR/SLACK/WEBHOOK",
+    "sms_api": "https://api.twilio.com/2010-04-01/Accounts/YOUR_SID/Messages.json"
+  },
+  "ml_models": {
+    "arrivals": {
+      "method": "prophet",
+      "retrain_frequency": "weekly",
+      "confidence_threshold": 0.8
+    },
+    "occupancy": {
+      "method": "xgboost",
+      "retrain_frequency": "monthly",
+      "confidence_threshold": 0.85
+    },
+    "revenue": {
+      "method": "lstm",
+      "retrain_frequency": "bi-weekly",
+      "confidence_threshold": 0.75
+    }
+  },
+  "schedule": {
+    "daily_insights": "06:00",
+    "weekly_forecasts": "Monday 08:00",
+    "monthly_reports": "1st 09:00",
+    "data_quality_checks": "22:00",
+    "cleanup": "Sunday 02:00"
+  },
+  "departments": {
+    "software_development": {
+      "priority_metrics": ["api_response_time", "data_completeness", "system_performance"],
+      "alert_level_threshold": "medium"
+    },
+    "operations": {
+      "priority_metrics": ["occupancy_rate", "revenue_per_room", "regional_performance"],
+      "alert_level_threshold": "high"
+    },
+    "marketing": {
+      "priority_metrics": ["market_diversity", "segment_performance", "roi"],
+      "alert_level_threshold": "medium"
+    },
+    "research_development": {
+      "priority_metrics": ["innovation_metrics", "technology_adoption", "competitive_analysis"],
+      "alert_level_threshold": "low"
+    },
+    "resource_mobility": {
+      "priority_metrics": ["transportation_efficiency", "resource_allocation", "infrastructure_usage"],
+      "alert_level_threshold": "medium"
+    },
+    "tourism_funding": {
+      "priority_metrics": ["revenue_growth", "roi", "economic_impact"],
+      "alert_level_threshold": "high"
+    }
+  },
+  "logging": {
+    "level": "INFO",
+    "file": "tourism_analytics.log",
+    "max_size": "10MB",
+    "backup_count": 5
+  }
+} 

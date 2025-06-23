@@ -89,6 +89,12 @@ export function Header() {
 
             <div className="hidden md:flex space-x-6">
               <Link
+                href="/dashboard"
+                className="text-foreground hover:text-primary-600 transition-colors font-medium"
+              >
+                Dashboard
+              </Link>
+              <Link
                 href="/upload"
                 className="text-foreground hover:text-primary-600 transition-colors font-medium"
               >
