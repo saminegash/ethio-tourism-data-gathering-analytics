@@ -109,8 +109,8 @@ except Exception as e:
 
 print("\n" + "=" * 60)
 print("🎯 NEXT STEPS:")
-print("   1. If saves failed, run this SQL in Supabase:")
-print("      Go to SQL Editor and paste: sql/migrations/disable_rls_temporarily.sql")
+print("   1. If saves failed, fix issue and run the followin sql")
+print("      Go to SQL Editor and paste: sql/migrations/initial.sql")
 print("   2. Once that's done, run this test again")
 print("   3. If all tests pass, your analytics system is ready!")
 print("   4. Run: python tourism_analytics_orchestrator.py run-pipeline")

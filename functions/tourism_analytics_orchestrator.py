@@ -56,10 +56,21 @@ class TourismAnalyticsOrchestrator:
             self.config.get('supabase_url'),
             self.config.get('supabase_key')
         )
-        self.sync_manager = SupabaseSyncManager(
-            self.config.get('supabase_url'),
-            self.config.get('supabase_key')
-        )
+        
+        # Initialize sync manager with error handling
+        try:
+            if SupabaseSyncManager and self.config.get('supabase_url') and self.config.get('supabase_key'):
+                self.sync_manager = SupabaseSyncManager(
+                    self.config.get('supabase_url'),
+                    self.config.get('supabase_key')
+                )
+                logger.info("Sync manager initialized successfully")
+            else:
+                self.sync_manager = None
+                logger.warning("Sync manager not available - running in offline mode")
+        except Exception as e:
+            logger.warning(f"Could not initialize sync manager: {str(e)} - running in offline mode")
+            self.sync_manager = None
         
         # Track operation status
         self.last_run_timestamp = None
@@ -114,25 +125,42 @@ class TourismAnalyticsOrchestrator:
                 return {'success': False, 'error': report['error']}
             
             # Save forecasts to database
-            if 'forecasts' in report:
-                forecast_saved = self.sync_manager.save_forecasts(report['forecasts'])
-                logger.info(f"Forecasts saved: {forecast_saved}")
+            if 'forecasts' in report and self.sync_manager:
+                try:
+                    forecast_saved = self.sync_manager.save_forecasts(report['forecasts'])
+                    logger.info(f"Forecasts saved: {forecast_saved}")
+                except Exception as e:
+                    logger.warning(f"Could not save forecasts: {str(e)}")
             
             # Save department insights
-            if 'departmental_insights' in report:
-                insights_saved = self.sync_manager.save_department_insights(
-                    report['departmental_insights']
-                )
-                logger.info(f"Department insights saved: {insights_saved}")
+            if 'departmental_insights' in report and self.sync_manager:
+                try:
+                    insights_saved = self.sync_manager.save_department_insights(
+                        report['departmental_insights']
+                    )
+                    logger.info(f"Department insights saved: {insights_saved}")
+                except Exception as e:
+                    logger.warning(f"Could not save department insights: {str(e)}")
             
             # Save comprehensive report
-            report_id = self.sync_manager.save_analytics_report(report)
-            logger.info(f"Analytics report saved with ID: {report_id}")
+            if self.sync_manager:
+                try:
+                    report_id = self.sync_manager.save_analytics_report(report)
+                    logger.info(f"Analytics report saved with ID: {report_id}")
+                except Exception as e:
+                    logger.warning(f"Could not save analytics report: {str(e)}")
+                    report_id = f"local_{int(time.time())}"
+            else:
+                report_id = f"local_{int(time.time())}"
             
             # Trigger alerts if needed
-            alert_data = self._extract_alert_data(report)
-            alerts_triggered = self.sync_manager.trigger_alerts(alert_data)
-            logger.info(f"Alerts processed: {alerts_triggered}")
+            if self.sync_manager:
+                try:
+                    alert_data = self._extract_alert_data(report)
+                    alerts_triggered = self.sync_manager.trigger_alerts(alert_data)
+                    logger.info(f"Alerts processed: {alerts_triggered}")
+                except Exception as e:
+                    logger.warning(f"Could not process alerts: {str(e)}")
             
             # Record operation
             execution_time = (datetime.now() - start_time).total_seconds()
@@ -140,12 +168,24 @@ class TourismAnalyticsOrchestrator:
             
             logger.info(f"Full analytics pipeline completed in {execution_time:.2f} seconds")
             
+            # Enhanced response with dimensional analysis
+            summary = report.get('executive_summary', {})
+            
             return {
                 'success': True,
                 'report_id': report_id,
                 'execution_time': execution_time,
                 'timestamp': datetime.now().isoformat(),
-                'summary': report.get('executive_summary', {})
+                'summary': {
+                    'overall_status': summary.get('overall_status', 'unknown'),
+                    'alert_distribution': summary.get('alert_distribution', {}),
+                    'high_impact_metrics': summary.get('high_impact_metrics', []),
+                    'forecast_summary': summary.get('forecast_summary', {}),
+                    'key_opportunities': summary.get('key_opportunities', []),
+                    'dimensional_analysis': summary.get('dimensional_analysis', {}),
+                    'performance_indicators': summary.get('performance_indicators', {})
+                },
+                'data_sources_used': self._get_data_sources_info()
             }
             
         except Exception as e:
@@ -474,6 +514,17 @@ class TourismAnalyticsOrchestrator:
             except Exception as e:
                 logger.error(f"Scheduler error: {str(e)}")
                 time.sleep(300)  # Wait 5 minutes before retrying
+    
+    def _get_data_sources_info(self) -> Dict[str, Any]:
+        """Get information about data sources used"""
+        
+        sources_info = {
+            'supabase_available': bool(self.config.get('supabase_url') and self.config.get('supabase_key')),
+            'sync_manager_available': self.sync_manager is not None,
+            'fallback_sources': ['tourism_dataset.csv', 'tourism_data table']
+        }
+        
+        return sources_info
 
 def main():
     """Main CLI interface"""

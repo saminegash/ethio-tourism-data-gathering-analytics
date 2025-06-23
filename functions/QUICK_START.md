@@ -11,22 +11,7 @@ You already have working credentials:
 
 **This is enough to get started!**
 
-## Step 2: Disable RLS Temporarily
-
-Copy and paste this SQL into your Supabase SQL Editor:
-
-```sql
--- Quick fix: Disable RLS on analytics tables
-ALTER TABLE forecasts DISABLE ROW LEVEL SECURITY;
-ALTER TABLE department_insights DISABLE ROW LEVEL SECURITY;
-ALTER TABLE analytics_reports DISABLE ROW LEVEL SECURITY;
-ALTER TABLE system_performance_metrics DISABLE ROW LEVEL SECURITY;
-ALTER TABLE data_quality_metrics DISABLE ROW LEVEL SECURITY;
-```
-
-**Why?** This removes the permission barriers that are blocking your analytics.
-
-## Step 3: Test Everything
+## Step 2: Test Everything
 
 ```bash
 cd functions/
@@ -73,21 +58,3 @@ Visit: http://localhost:3000/dashboard/insights
 ## ✅ Success!
 
 Your analytics system is now working! The simplified approach:
-
-1. **Uses your existing single key** (no dual-key complexity)
-2. **Disables RLS temporarily** (removes permission barriers)
-3. **Works immediately** (no more configuration headaches)
-
-## 🔧 Optional: Re-enable Security Later
-
-When you're ready for production security:
-
-1. Get your service role key from Supabase
-2. Set up the dual-key system
-3. Re-enable RLS with proper policies
-
-But for now, **your analytics are working!**
-
----
-
-**If this still doesn't work, there's something more fundamental wrong. Let me know and I'll dig deeper.**
