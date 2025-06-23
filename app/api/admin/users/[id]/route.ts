@@ -46,7 +46,7 @@ export async function PATCH(
       );
     }
 
-    // Check if the current user has admin or super_agent role
+    // Check if the current user has admin role
     const { data: currentUserProfile, error: profileError } = await supabase
       .from("profiles")
       .select("role")
@@ -60,11 +60,10 @@ export async function PATCH(
       );
     }
 
-    if (!["admin", "super_agent"].includes(currentUserProfile.role)) {
+    if (currentUserProfile.role !== "admin") {
       return NextResponse.json(
         {
-          error:
-            "Insufficient permissions - Admin or Super Agent role required",
+          error: "Insufficient permissions - Admin role required",
         },
         { status: 403 }
       );
@@ -74,9 +73,11 @@ export async function PATCH(
     const { role } = await request.json();
 
     // Validate role
-    if (!["admin", "super_agent", "agent", "user"].includes(role)) {
+    if (!["admin", "viewer", "api_client", "partner"].includes(role)) {
       return NextResponse.json(
-        { error: "Invalid role. Must be: admin, super_agent, agent, or user" },
+        {
+          error: "Invalid role. Must be: admin, viewer, api_client, or partner",
+        },
         { status: 400 }
       );
     }

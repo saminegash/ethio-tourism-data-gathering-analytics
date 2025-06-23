@@ -45,15 +45,15 @@ export function Header() {
   const getRoleColor = (role: string) => {
     switch (role) {
       case "admin":
-        return "bg-accent-100 text-accent-800 dark:bg-accent-900/30 dark:text-accent-400";
+        return "bg-accent-100 text-accent-800";
       case "super_agent":
-        return "bg-secondary-100 text-secondary-800 dark:bg-secondary-900/30 dark:text-secondary-600";
+        return "bg-secondary-100 text-secondary-800";
       case "agent":
-        return "bg-primary-100 text-primary-800 dark:bg-primary-900/30 dark:text-primary-400";
+        return "bg-primary-100 text-primary-800";
       case "user":
-        return "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400";
+        return "bg-green-100 text-green-800";
       default:
-        return "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300";
+        return "bg-gray-100 text-gray-800";
     }
   };
 
@@ -76,13 +76,13 @@ export function Header() {
   };
 
   return (
-    <nav className="bg-surface-primary border-b border-border-primary shadow-soft">
+    <nav className="bg-white border-b border-gray-200 shadow-sm">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center space-x-8">
             <Link
               href="/"
-              className="text-xl font-bold text-foreground hover:text-primary-600 transition-colors"
+              className="text-xl font-bold text-gray-900 hover:text-primary-600 transition-colors"
             >
               🇪🇹 Ethiopia Tourism
             </Link>
@@ -90,17 +90,28 @@ export function Header() {
             <div className="hidden md:flex space-x-6">
               <Link
                 href="/dashboard"
-                className="text-foreground hover:text-primary-600 transition-colors font-medium"
+                className="text-gray-900 hover:text-primary-600 transition-colors font-medium"
               >
                 Dashboard
               </Link>
-              <Link
-                href="/upload"
-                className="text-foreground hover:text-primary-600 transition-colors font-medium"
-              >
-                Upload Data
-              </Link>
-              <Link
+              {isAuthenticated && user?.role === "admin" && (
+                <Link
+                  href="/upload"
+                  className="text-gray-900 hover:text-primary-600 transition-colors font-medium"
+                >
+                  Upload Data
+                </Link>
+              )}
+              {isAuthenticated &&
+                (userRole === "admin" || userRole === "partner") && (
+                  <Link
+                    href="/register"
+                    className="text-gray-900 hover:text-primary-600 transition-colors font-medium"
+                  >
+                    Register Tourist
+                  </Link>
+                )}
+              {/* <Link
                 href="/dashboard/arrivals"
                 className="text-foreground hover:text-primary-600 transition-colors font-medium"
               >
@@ -117,25 +128,25 @@ export function Header() {
                 className="text-foreground hover:text-accent-600 transition-colors font-medium"
               >
                 Visits
-              </Link>
+              </Link> */}
               <Link
-                href="/dashboard/surveys"
-                className="text-foreground hover:text-orange-600 transition-colors font-medium"
+                href="/dashboard/insights"
+                className="text-gray-900 hover:text-orange-600 transition-colors font-medium"
               >
-                Surveys
+                Insights
               </Link>
             </div>
           </div>
 
           <div className="flex items-center space-x-4">
-            <ThemeSwitcher />
+            {/* <ThemeSwitcher /> */}
 
             {/* Authenticated User Section */}
             {isAuthenticated && user ? (
               <div className="relative" ref={menuRef}>
                 <button
                   onClick={() => setShowUserMenu(!showUserMenu)}
-                  className="flex items-center space-x-3 text-sm rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 p-2 hover:bg-surface-secondary transition-colors"
+                  className="flex items-center space-x-3 text-sm rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 p-2 hover:bg-gray-100 transition-colors"
                 >
                   {/* User Avatar */}
                   <div className="w-8 h-8 bg-primary-600 rounded-full flex items-center justify-center text-white font-medium">
@@ -144,7 +155,7 @@ export function Header() {
 
                   {/* User Info */}
                   <div className="hidden md:block text-left">
-                    <p className="text-foreground font-medium">
+                    <p className="text-gray-900 font-medium">
                       {profile?.full_name || "User"}
                     </p>
                     <div className="flex items-center space-x-2">
@@ -160,7 +171,7 @@ export function Header() {
 
                   {/* Dropdown Arrow */}
                   <svg
-                    className="w-4 h-4 text-gray-500 dark:text-gray-400"
+                    className="w-4 h-4 text-gray-500"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -176,16 +187,14 @@ export function Header() {
 
                 {/* User Dropdown Menu */}
                 {showUserMenu && (
-                  <div className="absolute right-0 mt-2 w-64 bg-surface-primary border border-border-primary rounded-xl shadow-soft z-50">
+                  <div className="absolute right-0 mt-2 w-64 bg-white border border-gray-200 rounded-xl shadow-lg z-50">
                     <div className="py-1">
                       {/* User Info Section */}
-                      <div className="px-4 py-3 border-b border-border-primary">
-                        <p className="text-sm font-medium text-foreground">
+                      <div className="px-4 py-3 border-b border-gray-200">
+                        <p className="text-sm font-medium text-gray-900">
                           {profile?.full_name || "User"}
                         </p>
-                        <p className="text-sm text-gray-600 dark:text-gray-400">
-                          {user.email}
-                        </p>
+                        <p className="text-sm text-gray-600">{user.email}</p>
                         <div className="mt-2">
                           <span
                             className={`inline-flex items-center px-2 py-1 rounded text-xs font-medium ${getRoleColor(
@@ -200,7 +209,7 @@ export function Header() {
                       {/* Menu Items */}
                       <Link
                         href="/dashboard"
-                        className="block px-4 py-2 text-sm text-foreground hover:bg-surface-secondary transition-colors"
+                        className="block px-4 py-2 text-sm text-gray-900 hover:bg-gray-100 transition-colors"
                         onClick={() => setShowUserMenu(false)}
                       >
                         Dashboard
@@ -208,7 +217,7 @@ export function Header() {
 
                       <Link
                         href="/dashboard/settings"
-                        className="block px-4 py-2 text-sm text-foreground hover:bg-surface-secondary transition-colors"
+                        className="block px-4 py-2 text-sm text-gray-900 hover:bg-gray-100 transition-colors"
                         onClick={() => setShowUserMenu(false)}
                       >
                         Settings
@@ -217,7 +226,7 @@ export function Header() {
                       {/* Logout Button */}
                       <button
                         onClick={handleSignOut}
-                        className="block w-full text-left px-4 py-2 text-sm text-accent-600 dark:text-accent-400 hover:bg-accent-50 dark:hover:bg-accent-900/20 transition-colors"
+                        className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors"
                       >
                         Sign Out
                       </button>
@@ -230,11 +239,11 @@ export function Header() {
               <div className="flex items-center space-x-4">
                 <Link
                   href="/login"
-                  className="text-foreground hover:text-primary-600 transition-colors font-medium"
+                  className="text-gray-900 hover:text-primary-600 transition-colors font-medium"
                 >
                   Sign In
                 </Link>
-                <div className="text-sm text-gray-600 dark:text-gray-400">
+                <div className="text-sm text-gray-600">
                   Tourism Analytics Platform
                 </div>
               </div>

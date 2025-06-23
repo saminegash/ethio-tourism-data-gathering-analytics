@@ -15,7 +15,7 @@ export const selectAuthInitialized = (state: RootState) =>
 // Derived selectors
 export const selectUserRole = createSelector(
   [selectProfile],
-  (profile) => profile?.role || "user"
+  (profile) => profile?.role || "viewer"
 );
 
 export const selectUserEmail = createSelector(
@@ -29,29 +29,24 @@ export const selectUserFullName = createSelector(
 );
 
 // Role-based access selectors
-export const selectHasRole = createSelector(
-  [selectUserRole, (_, role: string) => role],
-  (userRole, requiredRole) => userRole === requiredRole
-);
-
 export const selectIsAdmin = createSelector(
   [selectUserRole],
   (role) => role === "admin"
 );
 
-export const selectIsSuperAgent = createSelector(
+export const selectIsViewer = createSelector(
   [selectUserRole],
-  (role) => role === "super_agent"
+  (role) => role === "viewer"
 );
 
-export const selectIsAgent = createSelector(
+export const selectIsApiClient = createSelector(
   [selectUserRole],
-  (role) => role === "agent"
+  (role) => role === "api_client"
 );
 
-export const selectIsUser = createSelector(
+export const selectIsPartner = createSelector(
   [selectUserRole],
-  (role) => role === "user"
+  (role) => role === "partner"
 );
 
 // Permission-based selectors
@@ -76,12 +71,11 @@ export const selectCanAccessPath = createSelector(
         "/system-admin",
         "/audit-logs",
       ],
-      super_agent: [
+      partner: [
         "/dashboard",
         "/analytics",
         "/reports",
         "/data-management",
-        "/users",
         "/settings",
         "/tourism-sites",
         "/visitor-analytics",
@@ -91,7 +85,7 @@ export const selectCanAccessPath = createSelector(
         "/surveys",
         "/export",
       ],
-      agent: [
+      api_client: [
         "/dashboard",
         "/analytics",
         "/reports",
@@ -103,7 +97,7 @@ export const selectCanAccessPath = createSelector(
         "/transport",
         "/surveys",
       ],
-      user: ["/dashboard", "/analytics", "/reports", "/settings"],
+      viewer: ["/dashboard", "/analytics", "/reports", "/settings"],
     };
 
     const allowedPaths =
@@ -113,11 +107,11 @@ export const selectCanAccessPath = createSelector(
 );
 
 export const selectCanManageUsers = createSelector([selectUserRole], (role) =>
-  ["admin", "super_agent"].includes(role)
+  ["admin"].includes(role)
 );
 
 export const selectCanManageAgents = createSelector([selectUserRole], (role) =>
-  ["admin", "super_agent"].includes(role)
+  ["admin", "partner"].includes(role)
 );
 
 export const selectCanAccessAdmin = createSelector(
@@ -132,20 +126,20 @@ export const selectCanAccessSystemAdmin = createSelector(
 );
 
 export const selectCanExportData = createSelector([selectUserRole], (role) =>
-  ["admin", "super_agent"].includes(role)
+  ["admin", "partner"].includes(role)
 );
 
 export const selectCanManageDataSources = createSelector(
   [selectUserRole],
-  (role) => ["admin", "super_agent", "agent"].includes(role)
+  (role) => ["admin", "partner", "api_client"].includes(role)
 );
 
 export const selectCanViewRevenueAnalytics = createSelector(
   [selectUserRole],
-  (role) => ["admin", "super_agent"].includes(role)
+  (role) => ["admin", "partner"].includes(role)
 );
 
 export const selectCanManageTourismSites = createSelector(
   [selectUserRole],
-  (role) => ["admin", "super_agent", "agent"].includes(role)
+  (role) => ["admin", "partner", "api_client"].includes(role)
 );

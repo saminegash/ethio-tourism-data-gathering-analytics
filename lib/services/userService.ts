@@ -2,7 +2,7 @@ export interface CreateUserData {
   email: string;
   password?: string;
   full_name: string;
-  role: "admin" | "super_agent" | "agent" | "user";
+  role: "admin" | "viewer" | "api_client" | "partner";
 }
 
 export interface UserWithProfile {

@@ -5,7 +5,7 @@ import { User } from "@supabase/supabase-js";
 // Define types
 export interface UserProfile {
   id: string;
-  role: "admin" | "super_agent" | "agent" | "user";
+  role: "admin" | "viewer" | "api_client" | "partner";
   email?: string;
   full_name?: string;
   avatar_url?: string;

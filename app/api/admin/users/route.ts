@@ -12,7 +12,7 @@ interface CreateUserRequest {
   email: string;
   password?: string;
   full_name: string;
-  role: "admin" | "super_agent" | "agent" | "user";
+  role: "admin" | "viewer" | "api_client" | "partner";
 }
 
 // Default password for new users
@@ -78,7 +78,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Check if the current user has admin or super_agent role
+    // Check if the current user has admin role
     const { data: currentUserProfile, error: profileError } = await supabase
       .from("profiles")
       .select("role")
@@ -92,11 +92,10 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    if (!["admin", "super_agent"].includes(currentUserProfile.role)) {
+    if (currentUserProfile.role !== "admin") {
       return NextResponse.json(
         {
-          error:
-            "Insufficient permissions - Admin or Super Agent role required",
+          error: "Insufficient permissions - Admin role required",
         },
         { status: 403 }
       );
@@ -123,9 +122,11 @@ export async function POST(request: NextRequest) {
     }
 
     // Validate role
-    if (!["admin", "super_agent", "agent", "user"].includes(userData.role)) {
+    if (!["admin", "viewer", "api_client", "partner"].includes(userData.role)) {
       return NextResponse.json(
-        { error: "Invalid role. Must be: admin, super_agent, agent, or user" },
+        {
+          error: "Invalid role. Must be: admin, viewer, api_client, or partner",
+        },
         { status: 400 }
       );
     }
@@ -177,9 +178,8 @@ export async function POST(request: NextRequest) {
       .from("profiles")
       .insert({
         id: authData.user.id,
-        email: userData.email,
-        full_name: userData.full_name,
         role: userData.role,
+        organization_name: userData.full_name, // Using full_name as organization_name since that's what the schema has
       })
       .select()
       .single();
@@ -254,7 +254,7 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    // Check if the current user has admin or super_agent role
+    // Check if the current user has admin role
     const { data: currentUserProfile, error: profileError } = await supabase
       .from("profiles")
       .select("role")
@@ -268,11 +268,10 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    if (!["admin", "super_agent"].includes(currentUserProfile.role)) {
+    if (currentUserProfile.role !== "admin") {
       return NextResponse.json(
         {
-          error:
-            "Insufficient permissions - Admin or Super Agent role required",
+          error: "Insufficient permissions - Admin role required",
         },
         { status: 403 }
       );
@@ -312,7 +311,7 @@ export async function GET(request: NextRequest) {
         profile: profile
           ? {
               role: profile.role,
-              full_name: profile.full_name,
+              full_name: profile.organization_name, // Using organization_name from database
             }
           : null,
       };

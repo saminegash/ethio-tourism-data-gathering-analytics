@@ -15,7 +15,7 @@ export function CreateUserForm({
   const [formData, setFormData] = useState<CreateUserData>({
     email: "",
     full_name: "",
-    role: "user",
+    role: "viewer",
     password: "",
   });
   const [loading, setLoading] = useState(false);
@@ -52,7 +52,7 @@ export function CreateUserForm({
       setFormData({
         email: "",
         full_name: "",
-        role: "user",
+        role: "viewer",
         password: "",
       });
 
@@ -144,9 +144,9 @@ export function CreateUserForm({
             required
             className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
           >
-            <option value="user">User</option>
-            <option value="agent">Agent</option>
-            <option value="super_agent">Super Agent</option>
+            <option value="viewer">Viewer</option>
+            <option value="api_client">API Client</option>
+            <option value="partner">Partner</option>
             <option value="admin">Admin</option>
           </select>
         </div>

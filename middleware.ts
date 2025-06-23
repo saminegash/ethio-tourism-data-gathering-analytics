@@ -25,12 +25,11 @@ const roleBasedPaths = {
     "/system-admin",
     "/audit-logs",
   ],
-  super_agent: [
+  partner: [
     "/dashboard",
     "/analytics",
     "/reports",
     "/data-management",
-    "/users",
     "/settings",
     "/tourism-sites",
     "/visitor-analytics",
@@ -40,7 +39,7 @@ const roleBasedPaths = {
     "/surveys",
     "/export",
   ],
-  agent: [
+  api_client: [
     "/dashboard",
     "/analytics",
     "/reports",
@@ -52,7 +51,7 @@ const roleBasedPaths = {
     "/transport",
     "/surveys",
   ],
-  user: ["/dashboard", "/analytics", "/reports", "/settings"],
+  viewer: ["/dashboard", "/analytics", "/reports", "/settings"],
 };
 
 // Routes that don't require authentication
@@ -116,14 +115,14 @@ function getRoleHomePath(role: string): string {
   switch (role) {
     case "admin":
       return "/dashboard";
-    case "super_agent":
+    case "partner":
       return "/dashboard";
-    case "agent":
+    case "api_client":
       return "/dashboard";
-    case "user":
+    case "viewer":
       return "/dashboard";
     default:
-      return "/login";
+      return "/dashboard"; // Default to dashboard instead of login to prevent loops
   }
 }
 
@@ -248,7 +247,13 @@ export async function middleware(req: NextRequest) {
         .eq("id", user.id)
         .single();
 
-      const role = profile?.role || "user";
+      if (error) {
+        console.log("Profile fetch error during redirect check:", error);
+        // If we can't get profile, just redirect to dashboard to prevent loops
+        return NextResponse.redirect(new URL("/dashboard", req.url));
+      }
+
+      const role = profile?.role || "viewer";
 
       console.log("Checking access:", {
         redirectUrl,
@@ -279,11 +284,12 @@ export async function middleware(req: NextRequest) {
         .single();
 
       if (error) {
-        console.log("Profile fetch error:", error);
+        console.log("Profile fetch error during login redirect:", error);
+        // If we can't get profile, just redirect to dashboard to prevent loops
         return NextResponse.redirect(new URL("/dashboard", req.url));
       }
 
-      const role = profile?.role || "user";
+      const role = profile?.role || "viewer";
       const homePath = getRoleHomePath(role);
       console.log(
         `Middleware: Redirecting authenticated user to home ${homePath}`
@@ -316,7 +322,7 @@ export async function middleware(req: NextRequest) {
       return res; // Continue without redirection if we can't determine role
     }
 
-    const role = profile?.role || "user"; // Default to user role if not specified
+    const role = profile?.role || "viewer"; // Default to viewer role if not specified
 
     // Check if user has access to the current route
     if (!hasAccessToPath(role, pathname)) {
