@@ -76,7 +76,7 @@ export function TouristRegistration({
     purpose_of_visit: "leisure",
     intended_stay_duration: 1,
     group_size: 1,
-    data_collection_consent: false,
+    data_collection_consent: true,
   });
 
   const [isScanning, setIsScanning] = useState(false);
@@ -233,8 +233,7 @@ export function TouristRegistration({
             className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 focus:border-primary-500 focus:ring-primary-500"
           >
             <option value="passport">Passport</option>
-            <option value="national_id">National ID</option>
-            <option value="both">Both</option>
+            <option value="passport">National ID</option>
           </select>
         </div>
 
@@ -390,24 +389,6 @@ export function TouristRegistration({
       </div>
 
       {/* Consent Checkboxes */}
-      <div className="space-y-3 p-4 bg-gray-50 rounded-lg">
-        <h3 className="font-medium text-gray-900">Privacy & Consent</h3>
-
-        <label className="flex items-start space-x-3">
-          <input
-            type="checkbox"
-            checked={formData.data_collection_consent}
-            onChange={(e) =>
-              handleInputChange("data_collection_consent", e.target.checked)
-            }
-            className="mt-1 rounded border-gray-300 text-primary-600 focus:ring-primary-500"
-          />
-          <span className="text-sm text-gray-700">
-            I consent to data collection from external systems (Immigration,
-            Fayda) to streamline my registration
-          </span>
-        </label>
-      </div>
 
       {error && (
         <div className="p-3 bg-red-50 border border-red-200 rounded-lg">

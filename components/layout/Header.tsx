@@ -121,30 +121,34 @@ export function Header() {
                       View Tourists
                     </Link>
                   )}
-                <Link
-                  href="/dashboard/arrivals"
-                  className="text-foreground hover:text-primary-600 transition-colors font-medium"
-                >
-                  Arrivals
-                </Link>
-                <Link
-                  href="/dashboard/occupancy"
-                  className="text-foreground hover:text-secondary-600 transition-colors font-medium"
-                >
-                  Occupancy
-                </Link>
-                <Link
-                  href="/dashboard/visits"
-                  className="text-foreground hover:text-accent-600 transition-colors font-medium"
-                >
-                  Visits
-                </Link>
-                <Link
-                  href="/dashboard/insights"
-                  className="text-gray-900 hover:text-orange-600 transition-colors font-medium"
-                >
-                  Insights
-                </Link>
+                {isAuthenticated && userRole === "admin" && (
+                  <>
+                    <Link
+                      href="/dashboard/arrivals"
+                      className="text-foreground hover:text-primary-600 transition-colors font-medium"
+                    >
+                      Arrivals
+                    </Link>
+                    <Link
+                      href="/dashboard/occupancy"
+                      className="text-foreground hover:text-secondary-600 transition-colors font-medium"
+                    >
+                      Occupancy
+                    </Link>
+                    <Link
+                      href="/dashboard/visits"
+                      className="text-foreground hover:text-accent-600 transition-colors font-medium"
+                    >
+                      Visits
+                    </Link>
+                    <Link
+                      href="/dashboard/insights"
+                      className="text-gray-900 hover:text-orange-600 transition-colors font-medium"
+                    >
+                      Insights
+                    </Link>
+                  </>
+                )}
               </div>
             )}
           </div>

@@ -904,7 +904,7 @@ export default function InsightsDashboard() {
                     </dt>
                     <dd className="text-lg font-medium text-gray-900">
                       {report.executive_summary.performance_indicators?.market_diversity_index?.toFixed(
-                        1
+                        2
                       )}
                       %
                     </dd>
@@ -929,7 +929,7 @@ export default function InsightsDashboard() {
                     </dt>
                     <dd className="text-lg font-medium text-gray-900">
                       {report.executive_summary.performance_indicators?.monthly_growth_rate?.toFixed(
-                        1
+                        3
                       )}
                       %
                     </dd>
