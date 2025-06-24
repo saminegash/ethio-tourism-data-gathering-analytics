@@ -103,6 +103,7 @@ const nonLocalizedRoutes = [
   "/sitemap.xml",
   "/robots.txt",
   "/favicon.ico",
+  "/tourists",
 ];
 
 // Helper function to check if a user has access to a path based on their role

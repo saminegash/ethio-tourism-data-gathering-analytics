@@ -87,64 +87,66 @@ export function Header() {
               🇪🇹 Ethiopia Tourism
             </Link>
 
-            <div className="hidden md:flex space-x-6">
-              <Link
-                href="/dashboard"
-                className="text-gray-900 hover:text-primary-600 transition-colors font-medium"
-              >
-                Dashboard
-              </Link>
-              {isAuthenticated && user?.role === "admin" && (
+            {isAuthenticated && (
+              <div className="hidden md:flex space-x-6">
                 <Link
-                  href="/upload"
+                  href="/dashboard"
                   className="text-gray-900 hover:text-primary-600 transition-colors font-medium"
                 >
-                  Upload Data
+                  Dashboard
                 </Link>
-              )}
-              {isAuthenticated &&
-                (userRole === "admin" || userRole === "partner") && (
+                {isAuthenticated && user?.role === "admin" && (
                   <Link
-                    href="/register"
+                    href="/upload"
                     className="text-gray-900 hover:text-primary-600 transition-colors font-medium"
                   >
-                    Register Tourist
+                    Upload Data
                   </Link>
                 )}
-              {isAuthenticated &&
-                (userRole === "admin" || userRole === "partner") && (
-                  <Link
-                    href="/tourists"
-                    className="text-gray-900 hover:text-primary-600 transition-colors font-medium"
-                  >
-                    View Tourists
-                  </Link>
-                )}
-              <Link
-                href="/dashboard/arrivals"
-                className="text-foreground hover:text-primary-600 transition-colors font-medium"
-              >
-                Arrivals
-              </Link>
-              <Link
-                href="/dashboard/occupancy"
-                className="text-foreground hover:text-secondary-600 transition-colors font-medium"
-              >
-                Occupancy
-              </Link>
-              <Link
-                href="/dashboard/visits"
-                className="text-foreground hover:text-accent-600 transition-colors font-medium"
-              >
-                Visits
-              </Link>
-              <Link
-                href="/dashboard/insights"
-                className="text-gray-900 hover:text-orange-600 transition-colors font-medium"
-              >
-                Insights
-              </Link>
-            </div>
+                {isAuthenticated &&
+                  (userRole === "admin" || userRole === "partner") && (
+                    <Link
+                      href="/register"
+                      className="text-gray-900 hover:text-primary-600 transition-colors font-medium"
+                    >
+                      Register Tourist
+                    </Link>
+                  )}
+                {isAuthenticated &&
+                  (userRole === "admin" || userRole === "partner") && (
+                    <Link
+                      href="/tourists"
+                      className="text-gray-900 hover:text-primary-600 transition-colors font-medium"
+                    >
+                      View Tourists
+                    </Link>
+                  )}
+                <Link
+                  href="/dashboard/arrivals"
+                  className="text-foreground hover:text-primary-600 transition-colors font-medium"
+                >
+                  Arrivals
+                </Link>
+                <Link
+                  href="/dashboard/occupancy"
+                  className="text-foreground hover:text-secondary-600 transition-colors font-medium"
+                >
+                  Occupancy
+                </Link>
+                <Link
+                  href="/dashboard/visits"
+                  className="text-foreground hover:text-accent-600 transition-colors font-medium"
+                >
+                  Visits
+                </Link>
+                <Link
+                  href="/dashboard/insights"
+                  className="text-gray-900 hover:text-orange-600 transition-colors font-medium"
+                >
+                  Insights
+                </Link>
+              </div>
+            )}
           </div>
 
           <div className="flex items-center space-x-4">
