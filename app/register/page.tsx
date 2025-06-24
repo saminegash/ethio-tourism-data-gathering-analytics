@@ -90,12 +90,20 @@ export default function RegisterPage() {
               Complete registration in under 1 minute using passport or national
               ID with optional external data integration.
             </p>
-            <button
-              onClick={() => setShowRegistration(true)}
-              className="w-full bg-primary-600 hover:bg-primary-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
-            >
-              Start Registration
-            </button>
+            <div className="space-y-3">
+              <button
+                onClick={() => setShowRegistration(true)}
+                className="w-full bg-primary-600 hover:bg-primary-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
+              >
+                Start Registration
+              </button>
+              <a
+                href="/tourists"
+                className="w-full inline-flex items-center justify-center px-6 py-3 border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-colors"
+              >
+                View Registered Tourists
+              </a>
+            </div>
           </div>
         </div>
       </div>

@@ -46,9 +46,9 @@ export function Header() {
     switch (role) {
       case "admin":
         return "bg-accent-100 text-accent-800";
-      case "super_agent":
+      case "partner":
         return "bg-secondary-100 text-secondary-800";
-      case "agent":
+      case "api_client":
         return "bg-primary-100 text-primary-800";
       case "user":
         return "bg-green-100 text-green-800";
@@ -59,8 +59,8 @@ export function Header() {
 
   const getRoleLabel = (role: string) => {
     switch (role) {
-      case "super_agent":
-        return "Super Agent";
+      case "partner":
+        return "Partner";
       default:
         return role.charAt(0).toUpperCase() + role.slice(1);
     }
@@ -111,7 +111,16 @@ export function Header() {
                     Register Tourist
                   </Link>
                 )}
-              {/* <Link
+              {isAuthenticated &&
+                (userRole === "admin" || userRole === "partner") && (
+                  <Link
+                    href="/tourists"
+                    className="text-gray-900 hover:text-primary-600 transition-colors font-medium"
+                  >
+                    View Tourists
+                  </Link>
+                )}
+              <Link
                 href="/dashboard/arrivals"
                 className="text-foreground hover:text-primary-600 transition-colors font-medium"
               >
@@ -128,7 +137,7 @@ export function Header() {
                 className="text-foreground hover:text-accent-600 transition-colors font-medium"
               >
                 Visits
-              </Link> */}
+              </Link>
               <Link
                 href="/dashboard/insights"
                 className="text-gray-900 hover:text-orange-600 transition-colors font-medium"
@@ -187,14 +196,14 @@ export function Header() {
 
                 {/* User Dropdown Menu */}
                 {showUserMenu && (
-                  <div className="absolute right-0 mt-2 w-64 bg-white border border-gray-200 rounded-xl shadow-lg z-50">
+                  <div className="absolute right-0 mt-2 w-64 bg-black border border-gray-200 rounded-xl shadow-lg z-50 text-white">
                     <div className="py-1">
                       {/* User Info Section */}
                       <div className="px-4 py-3 border-b border-gray-200">
-                        <p className="text-sm font-medium text-gray-900">
+                        <p className="text-sm font-medium text-white">
                           {profile?.full_name || "User"}
                         </p>
-                        <p className="text-sm text-gray-600">{user.email}</p>
+                        <p className="text-sm text-gray-200">{user.email}</p>
                         <div className="mt-2">
                           <span
                             className={`inline-flex items-center px-2 py-1 rounded text-xs font-medium ${getRoleColor(
@@ -209,7 +218,7 @@ export function Header() {
                       {/* Menu Items */}
                       <Link
                         href="/dashboard"
-                        className="block px-4 py-2 text-sm text-gray-900 hover:bg-gray-100 transition-colors"
+                        className="block px-4 py-2 text-sm text-gray-100 hover:bg-primary-600 transition-colors"
                         onClick={() => setShowUserMenu(false)}
                       >
                         Dashboard
@@ -217,7 +226,7 @@ export function Header() {
 
                       <Link
                         href="/dashboard/settings"
-                        className="block px-4 py-2 text-sm text-gray-900 hover:bg-gray-100 transition-colors"
+                        className="block px-4 py-2 text-sm text-gray-100 hover:bg-primary-600 transition-colors"
                         onClick={() => setShowUserMenu(false)}
                       >
                         Settings
