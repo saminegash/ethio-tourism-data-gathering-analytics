@@ -500,7 +500,10 @@ export function TouristList({ className = "" }: Props) {
                 <SortButton field="purpose_of_visit">Purpose</SortButton>
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                <SortButton field="verification_status">Status</SortButton>
+                <SortButton field="verification_status">Group Size</SortButton>
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <SortButton field="verification_status">Days </SortButton>
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 <SortButton field="created_at">Registered</SortButton>
@@ -548,11 +551,16 @@ export function TouristList({ className = "" }: Props) {
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <span
-                    className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(
-                      tourist.verification_status
-                    )}`}
+                    className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${tourist.group_size}`}
                   >
                     {tourist.verification_status}
+                  </span>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <span
+                    className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${tourist.group_size}`}
+                  >
+                    {tourist.intended_stay_duration}
                   </span>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
