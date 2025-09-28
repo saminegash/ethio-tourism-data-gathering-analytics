@@ -1,0 +1,117 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Wristband Linked Event",
+  "description": "Event triggered when an NFC wristband is linked to a tourist account",
+  "type": "object",
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$",
+      "description": "ULID format event identifier"
+    },
+    "topic": {
+      "type": "string",
+      "const": "wristband.linked"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+$"
+    },
+    "occurred_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "actor_id": {
+      "type": "string",
+      "description": "Hashed tourist identifier"
+    },
+    "context": {
+      "type": "object",
+      "properties": {
+        "app": {
+          "type": "string",
+          "enum": ["operator_portal", "registration_kiosk", "mobile_app"]
+        },
+        "device": {
+          "type": "string"
+        },
+        "operator_id": {
+          "type": "string",
+          "description": "ID of operator who performed the linking"
+        },
+        "location": {
+          "type": "string",
+          "description": "Location where linking occurred"
+        }
+      },
+      "required": ["app", "device"],
+      "additionalProperties": false
+    },
+    "payload": {
+      "type": "object",
+      "properties": {
+        "wristband_id": {
+          "type": "string",
+          "description": "Internal wristband identifier"
+        },
+        "wristband_uid_hash": {
+          "type": "string",
+          "description": "Hashed NFC UID for security"
+        },
+        "wallet_balance": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Initial wallet balance in ETB"
+        },
+        "currency": {
+          "type": "string",
+          "enum": ["ETB", "USD"],
+          "default": "ETB"
+        },
+        "spending_limits": {
+          "type": "object",
+          "properties": {
+            "daily": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Daily spending limit in ETB"
+            },
+            "offline": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Offline spending limit in ETB"
+            },
+            "transaction": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Per-transaction limit in ETB"
+            }
+          },
+          "required": ["daily", "offline"],
+          "additionalProperties": false
+        },
+        "permissions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["attraction_entry", "transport", "dining", "shopping", "vip_access"]
+          },
+          "description": "Initial permissions granted"
+        },
+        "hardware_info": {
+          "type": "object",
+          "properties": {
+            "version": {"type": "string"},
+            "manufacturer": {"type": "string"},
+            "battery_level": {"type": "integer", "minimum": 0, "maximum": 100}
+          },
+          "additionalProperties": false
+        }
+      },
+      "required": ["wristband_id", "wallet_balance", "spending_limits"],
+      "additionalProperties": false
+    }
+  },
+  "required": ["event_id", "topic", "version", "occurred_at", "actor_id", "context", "payload"],
+  "additionalProperties": false
+}

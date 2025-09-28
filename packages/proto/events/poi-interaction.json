@@ -1,0 +1,136 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "POI Interaction Event",
+  "description": "Event triggered when a tourist interacts with a Point of Interest",
+  "type": "object",
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+    },
+    "topic": {
+      "type": "string",
+      "const": "poi.interaction"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+$"
+    },
+    "occurred_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "actor_id": {
+      "type": "string",
+      "description": "Hashed tourist identifier"
+    },
+    "context": {
+      "type": "object",
+      "properties": {
+        "device": {
+          "type": "string",
+          "description": "Device that detected the interaction (beacon, NFC reader, etc.)"
+        },
+        "location": {
+          "type": "string",
+          "description": "Specific location within the POI"
+        },
+        "session_id": {
+          "type": "string",
+          "description": "Tourist session identifier"
+        }
+      },
+      "required": ["device", "location"],
+      "additionalProperties": false
+    },
+    "payload": {
+      "type": "object",
+      "properties": {
+        "interaction_type": {
+          "type": "string",
+          "enum": ["entry_scan", "exit_scan", "beacon_proximity", "qr_scan", "photo_taken", "audio_guide", "info_request"]
+        },
+        "poi_id": {
+          "type": "string",
+          "description": "Point of Interest identifier"
+        },
+        "poi_name": {
+          "type": "string",
+          "description": "Human-readable POI name"
+        },
+        "poi_category": {
+          "type": "string",
+          "enum": ["historical_site", "natural_attraction", "museum", "religious_site", "cultural_center", "viewpoint", "restaurant", "shop", "accommodation"]
+        },
+        "dwell_time_minutes": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Time spent at POI in minutes (for exit events)"
+        },
+        "queue_time_minutes": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Time spent in queue before entry"
+        },
+        "crowd_level": {
+          "type": "string",
+          "enum": ["low", "moderate", "high", "very_high"],
+          "description": "Current crowd level at POI"
+        },
+        "weather_condition": {
+          "type": "string",
+          "enum": ["sunny", "cloudy", "rainy", "windy", "hot", "cold"],
+          "description": "Weather condition during visit"
+        },
+        "temperature_celsius": {
+          "type": "integer",
+          "minimum": -50,
+          "maximum": 60,
+          "description": "Temperature in Celsius"
+        },
+        "group_size": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Size of tourist group"
+        },
+        "has_guide": {
+          "type": "boolean",
+          "description": "Whether tourist has a guide"
+        },
+        "guide_language": {
+          "type": "string",
+          "enum": ["en", "am", "or", "ti", "fr", "de", "it", "es"],
+          "description": "Language of guide if applicable"
+        },
+        "accessibility_used": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["wheelchair_ramp", "audio_description", "sign_language", "braille", "large_print"]
+          },
+          "description": "Accessibility features used"
+        },
+        "satisfaction_rating": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5,
+          "description": "Optional immediate satisfaction rating"
+        },
+        "interaction_metadata": {
+          "type": "object",
+          "properties": {
+            "beacon_rssi": {"type": "integer", "description": "Bluetooth beacon signal strength"},
+            "nfc_read_time_ms": {"type": "integer", "description": "NFC read time in milliseconds"},
+            "qr_scan_success": {"type": "boolean", "description": "Whether QR scan was successful"},
+            "audio_guide_duration_seconds": {"type": "integer", "description": "Audio guide duration"}
+          },
+          "additionalProperties": false
+        }
+      },
+      "required": ["interaction_type", "poi_id", "poi_category"],
+      "additionalProperties": false
+    }
+  },
+  "required": ["event_id", "topic", "version", "occurred_at", "actor_id", "context", "payload"],
+  "additionalProperties": false
+}

@@ -1,0 +1,143 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Recommendation Shown Event",
+  "description": "Event triggered when a recommendation is displayed to a tourist",
+  "type": "object",
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+    },
+    "topic": {
+      "type": "string",
+      "const": "recommendation.shown"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+$"
+    },
+    "occurred_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "actor_id": {
+      "type": "string",
+      "description": "Hashed tourist identifier"
+    },
+    "context": {
+      "type": "object",
+      "properties": {
+        "app": {
+          "type": "string",
+          "enum": ["tourist_pwa", "mobile_app", "kiosk", "web_portal"]
+        },
+        "device": {
+          "type": "string"
+        },
+        "session_id": {
+          "type": "string"
+        },
+        "page_url": {
+          "type": "string",
+          "description": "URL or page where recommendation was shown"
+        },
+        "location": {
+          "type": "string",
+          "description": "Tourist's current location"
+        }
+      },
+      "required": ["app", "device"],
+      "additionalProperties": false
+    },
+    "payload": {
+      "type": "object",
+      "properties": {
+        "recommendation_id": {
+          "type": "string",
+          "description": "Unique recommendation identifier"
+        },
+        "recommendation_type": {
+          "type": "string",
+          "enum": ["poi", "restaurant", "accommodation", "activity", "route", "event", "product"]
+        },
+        "algorithm_used": {
+          "type": "string",
+          "enum": ["content_based", "collaborative_filtering", "hybrid", "popularity", "trending", "manual"]
+        },
+        "model_version": {
+          "type": "string",
+          "description": "Version of the ML model used"
+        },
+        "confidence_score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Model confidence in the recommendation"
+        },
+        "relevance_score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Relevance score for the tourist"
+        },
+        "recommended_item": {
+          "type": "object",
+          "properties": {
+            "item_id": {"type": "string"},
+            "item_name": {"type": "string"},
+            "item_category": {"type": "string"},
+            "item_subcategory": {"type": "string"},
+            "price_range": {"type": "string", "enum": ["free", "low", "medium", "high", "premium"]},
+            "distance_km": {"type": "number", "minimum": 0},
+            "estimated_duration_minutes": {"type": "integer", "minimum": 0},
+            "rating": {"type": "number", "minimum": 0, "maximum": 5}
+          },
+          "required": ["item_id", "item_name", "item_category"],
+          "additionalProperties": false
+        },
+        "context_features": {
+          "type": "object",
+          "properties": {
+            "time_of_day": {"type": "string", "enum": ["morning", "afternoon", "evening", "night"]},
+            "day_of_week": {"type": "string", "enum": ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]},
+            "weather": {"type": "string"},
+            "crowd_level": {"type": "string", "enum": ["low", "moderate", "high"]},
+            "tourist_mood": {"type": "string", "enum": ["adventurous", "relaxed", "cultural", "social", "solo"]},
+            "budget_preference": {"type": "string", "enum": ["budget", "mid_range", "luxury"]},
+            "group_composition": {"type": "string", "enum": ["solo", "couple", "family", "friends", "tour_group"]}
+          },
+          "additionalProperties": false
+        },
+        "personalization_factors": {
+          "type": "object",
+          "properties": {
+            "previous_visits": {"type": "array", "items": {"type": "string"}},
+            "preferred_categories": {"type": "array", "items": {"type": "string"}},
+            "spending_pattern": {"type": "string", "enum": ["conservative", "moderate", "generous"]},
+            "activity_level": {"type": "string", "enum": ["low", "moderate", "high"]},
+            "cultural_interest": {"type": "number", "minimum": 0, "maximum": 1}
+          },
+          "additionalProperties": false
+        },
+        "display_position": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Position in the recommendation list (1-based)"
+        },
+        "total_recommendations": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Total number of recommendations shown"
+        },
+        "ab_test_variant": {
+          "type": "string",
+          "description": "A/B test variant identifier"
+        }
+      },
+      "required": ["recommendation_id", "recommendation_type", "algorithm_used", "recommended_item"],
+      "additionalProperties": false
+    }
+  },
+  "required": ["event_id", "topic", "version", "occurred_at", "actor_id", "context", "payload"],
+  "additionalProperties": false
+}

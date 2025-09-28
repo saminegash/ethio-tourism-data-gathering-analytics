@@ -1,0 +1,160 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Tourist Check-in Event",
+  "description": "Event triggered when a tourist registers at a destination",
+  "type": "object",
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$",
+      "description": "ULID format event identifier"
+    },
+    "topic": {
+      "type": "string",
+      "const": "tourist.check_in"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+$",
+      "description": "Schema version"
+    },
+    "occurred_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when event occurred"
+    },
+    "actor_id": {
+      "type": "string",
+      "description": "Hashed tourist identifier for privacy"
+    },
+    "context": {
+      "type": "object",
+      "properties": {
+        "app": {
+          "type": "string",
+          "enum": ["tourist_pwa", "operator_portal", "registration_kiosk"]
+        },
+        "device": {
+          "type": "string",
+          "enum": ["mobile_ios", "mobile_android", "desktop", "kiosk", "tablet"]
+        },
+        "session_id": {
+          "type": "string",
+          "description": "User session identifier"
+        },
+        "user_agent": {
+          "type": "string",
+          "description": "Browser/app user agent"
+        }
+      },
+      "required": ["app", "device"],
+      "additionalProperties": false
+    },
+    "geo": {
+      "type": "object",
+      "properties": {
+        "region": {
+          "type": "string",
+          "description": "Coarse region identifier for privacy"
+        },
+        "destination_id": {
+          "type": "string",
+          "description": "Destination identifier"
+        },
+        "coordinates": {
+          "type": "object",
+          "properties": {
+            "lat": {"type": "number", "minimum": -90, "maximum": 90},
+            "lng": {"type": "number", "minimum": -180, "maximum": 180}
+          },
+          "description": "Coarse coordinates (rounded to ~1km precision)"
+        }
+      },
+      "additionalProperties": false
+    },
+    "payload": {
+      "type": "object",
+      "properties": {
+        "registration_method": {
+          "type": "string",
+          "enum": ["passport_scan", "manual_entry", "immigration_api", "fayda_api", "qr_code"]
+        },
+        "group_size": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 50
+        },
+        "intended_duration_days": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 365
+        },
+        "purpose_of_visit": {
+          "type": "string",
+          "enum": ["leisure", "business", "cultural", "adventure", "religious", "other"]
+        },
+        "nationality": {
+          "type": "string",
+          "pattern": "^[A-Z]{2}$",
+          "description": "ISO 3166-1 alpha-2 country code"
+        },
+        "age_group": {
+          "type": "string",
+          "enum": ["child", "teen", "adult", "senior"],
+          "description": "Age group for analytics (privacy-preserving)"
+        },
+        "consent_marketing": {
+          "type": "boolean",
+          "description": "Consent for marketing communications"
+        },
+        "consent_location": {
+          "type": "boolean",
+          "description": "Consent for location tracking"
+        },
+        "consent_analytics": {
+          "type": "boolean",
+          "description": "Consent for analytics data collection"
+        },
+        "preferred_language": {
+          "type": "string",
+          "enum": ["en", "am", "or", "ti"],
+          "description": "Preferred language (en=English, am=Amharic, or=Oromo, ti=Tigrinya)"
+        },
+        "special_requirements": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["wheelchair_access", "dietary_restrictions", "medical_assistance", "child_friendly", "elderly_assistance"]
+          }
+        }
+      },
+      "required": ["registration_method", "group_size"],
+      "additionalProperties": false
+    },
+    "pii_map": {
+      "type": "object",
+      "description": "Mapping of PII fields to their hashed/tokenized versions",
+      "properties": {
+        "passport_number": {
+          "type": "string",
+          "description": "Hashed passport number"
+        },
+        "full_name": {
+          "type": "string",
+          "description": "Tokenized reference to full name"
+        },
+        "email": {
+          "type": "string",
+          "description": "Hashed email address"
+        },
+        "phone": {
+          "type": "string",
+          "description": "Hashed phone number"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "required": ["event_id", "topic", "version", "occurred_at", "actor_id", "context", "payload"],
+  "additionalProperties": false
+}
