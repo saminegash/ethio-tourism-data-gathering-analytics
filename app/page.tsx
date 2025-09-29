@@ -20,10 +20,16 @@ export default function HomePage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
+              href="/showcase"
+              className="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors shadow-lg"
+            >
+              🚀 Launch Platform Showcase
+            </Link>
+            <Link
               href="/dashboard/insights"
               className="bg-primary-600 hover:bg-primary-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors shadow-lg"
             >
-              View Dashboards
+              📊 View Dashboards
             </Link>
           </div>
         </div>

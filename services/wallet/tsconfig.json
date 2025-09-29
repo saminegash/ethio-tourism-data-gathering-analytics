@@ -1,0 +1,11 @@
+{
+  "extends": "../../tsconfig.service-base.json",
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@wallet/*": ["src/*"]
+    }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}

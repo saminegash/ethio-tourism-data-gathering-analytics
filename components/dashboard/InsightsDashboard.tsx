@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -179,11 +179,8 @@ export default function InsightsDashboard() {
   const [timeRange, setTimeRange] = useState<string>("30d");
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    fetchInsightsReport();
-  }, [timeRange]);
-
-  const fetchInsightsReport = async () => {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const fetchInsightsReport = useCallback(async () => {
     setLoading(true);
     setError(null);
     try {
@@ -245,7 +242,11 @@ export default function InsightsDashboard() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [timeRange]);
+
+  useEffect(() => {
+    fetchInsightsReport();
+  }, [fetchInsightsReport]);
 
   const getMockDimensionalAnalysis = () => ({
     regions: {

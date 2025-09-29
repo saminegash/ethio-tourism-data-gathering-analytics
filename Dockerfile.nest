@@ -1,0 +1,14 @@
+# Base image for NestJS services
+FROM node:20-alpine AS base
+WORKDIR /app
+RUN corepack enable
+
+COPY package.json pnpm-lock.yaml* ./
+COPY pnpm-workspace.yaml ./
+COPY services ./services
+COPY packages ./packages
+COPY tsconfig.service-base.json ./
+
+RUN pnpm install --filter ./services/auth --filter ./services/wallet --filter ./services/catalog --filter ./services/telemetry --filter ./services/gateway --recursive --frozen-lockfile || pnpm install
+
+CMD ["node", "--version"]

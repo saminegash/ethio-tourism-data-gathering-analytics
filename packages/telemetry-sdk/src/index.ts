@@ -1,6 +1,6 @@
 import { ulid } from 'ulid';
 import Ajv from 'ajv';
-import addFormats from 'ajv-formats';
+// import addFormats from 'ajv-formats';
 import {
   TelemetryEvent,
   TelemetryConfig,
@@ -48,7 +48,7 @@ export class TelemetrySDK {
 
     // Initialize AJV for schema validation
     this.ajv = new Ajv({ allErrors: true });
-    addFormats(this.ajv);
+    // addFormats(this.ajv);
     
     // Load schemas
     this.loadSchemas();

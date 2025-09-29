@@ -11,21 +11,26 @@
     "lint": "eslint src/**/*.ts",
     "prepublishOnly": "npm run build"
   },
-  "keywords": ["tourism", "telemetry", "analytics", "ethiopia"],
+  "keywords": [
+    "tourism",
+    "telemetry",
+    "analytics",
+    "ethiopia"
+  ],
   "author": "Ethiopia Tourism Platform",
   "license": "MIT",
   "dependencies": {
     "ajv": "^8.12.0",
-    "ulid": "^2.3.0"
+    "ulid": "^2.4.0"
   },
   "devDependencies": {
-    "@types/node": "^20.0.0",
-    "typescript": "^5.0.0",
-    "jest": "^29.0.0",
     "@types/jest": "^29.0.0",
-    "eslint": "^8.0.0",
+    "@types/node": "^20.0.0",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
-    "@typescript-eslint/parser": "^6.0.0"
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.0.0",
+    "jest": "^29.0.0",
+    "typescript": "^5.0.0"
   },
   "files": [
     "dist/**/*",

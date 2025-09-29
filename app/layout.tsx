@@ -35,7 +35,7 @@ export default function RootLayout({
           <AuthProvider>
             <ThemeProvider>
               <div className="min-h-screen bg-surface-secondary transition-colors duration-300">
-                <Header />
+                {/* <Header /> */}
                 <main className="bg-surface-secondary">{children}</main>
               </div>
             </ThemeProvider>
